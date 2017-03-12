@@ -1,0 +1,91 @@
+<html>
+<head>
+<script type="text/javascript" src="mopidy.test.js"></script>
+<script type="text/javascript" src="../../jquery/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="jquery.irmopidy.js"></script>
+<link rel="stylesheet" type="text/css" media="all" href="jquery.irmopidy.css" />
+</head>
+<body>
+<div style="width: 300px; height: 300px;">
+	<div id="test"></div>
+</div>
+<script>
+	$("#test").irmopidy({
+		webSocketUrl: "ws://10.0.0.4:6680/mopidy/ws/"
+	});
+
+	var get = function(key, object) {
+		return object[key];
+	};
+
+	var printPlaylist = function(model) {
+		$("#playlist").text(model.name);
+		console.log(model.__model__ + ": " + model.name);
+		console.log(model);
+		return model;
+	};
+
+	var queueAndPlay = function (playlistNum, trackNum) {
+	    playlistNum = playlistNum || 0;
+	    trackNum = trackNum || 0;
+	    mopidy.playlists.getPlaylists()
+	        // => list of Playlists
+	        .fold(get, playlistNum)
+	        // => Playlist
+	        .then(printPlaylist)
+	        // => Playlist
+	        .fold(get, 'tracks')
+	        // => list of Tracks
+	        .then(mopidy.tracklist.add)
+	        // => list of TlTracks
+	        .fold(get, trackNum)
+	        // => TlTrack
+	        .then(mopidy.playback.play)
+	        // => null
+	        .catch(console.error.bind(console))  // Handle errors here
+	        // => null
+	        .done();                       // ...or they'll be thrown here
+	};
+
+	function categoryLoad(category, callback) {
+		switch (category) {
+		case "playlists":
+			mopidy.playlists.asList().then(function(playlists) {
+				itemsList = playlists;
+				categorySelect(0);
+				callback();
+				console.log(playlists);
+			});
+			break;
+		}
+	};
+
+	function categorySelect(index) {
+
+	};
+
+	/**
+	 * Play the category previously loaded
+	 */
+	function categoryPlay() {
+
+	};
+
+	var itemsList = [];
+	var mopidy = new Mopidy();             // Connect to server
+//	mopidy.on(console.log.bind(console));  // Log all events
+	mopidy.on("state:online", function() {
+		/* List all the available playlists */
+		categoryLoad("playlists", function() {
+			/* Check if something is playing, if not play */
+			mopidy.playback.getState().then(function(state) {
+				if (state == "stopped") {
+
+				}
+			});
+		});
+	});
+	//mopidy.on("state:online", queueAndPlay);
+</script>
+</body>
+</html>

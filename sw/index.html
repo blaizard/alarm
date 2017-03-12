@@ -1,0 +1,66 @@
+<html>
+	<head>
+		<script src="lib/js/irrequire.min.js"></script>
+	<!--	<script src="core/js/script.js"></script> //-->
+		<link rel="stylesheet" href="dist/theme/default/style.min.css"/>
+		<meta charset="utf-8"/>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	</head>
+	<body>
+		<div id="content"></div>
+		<div id="config-trigger"></div>
+		<div id="notification"></div>
+
+		<script type="text/javascript">
+
+			irRequire.map = {
+				"Log": "core/js/logger.js",
+				"Core": "core/js/core.js",
+				"Menu": "core/js/menu.js",
+				"Dashboard": "core/js/dashboard.js",
+				"Display": "core/js/display.js",
+				"Logger": "lib/js/logger.min.js",
+				"jQuery": "lib/js/jquery-2.2.3.min.js",
+				"Irform": "lib/irform/js/irform.min.js",
+				"$().irdashboard": "lib/js/jquery.irdashboard.js",
+				"$().ircontainer": "lib/js/jquery.ircontainer.js"
+			};
+
+			irRequire(["Log"], function() {
+
+				Log.init();
+
+				// Load asynchronously all the ressources
+				irRequire(["jQuery", "Core", "Menu"], function() {
+
+					var core = new Core("#content");
+
+					irRequire(["Display"], function() {
+						$("#config-trigger").click(function() {
+							Menu.config(function() {
+								core.update();
+							});
+						});
+					});
+
+			//		$("#content").html(dashboardLoading());
+
+					// Timer used to ensure that the screen is set to its final size
+			//		setTimeout(function() {
+						// Resize some of the elements
+			/*			$("#config-trigger > div").ircontainer("elementFill");
+						$("#config-trigger").click(function() {
+							screenConfig(function() {
+								dashboardInit();
+							});
+						});
+
+						// Initialize the dashboard
+						dashboardInit();*/
+
+			//		}, 0/*3000*/);
+				});
+			});
+		</script>
+	</body>
+</html>

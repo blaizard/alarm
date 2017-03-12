@@ -1,0 +1,151 @@
+$loadingColor: #fff;
+
+.loading {
+
+	position: relative;
+	vertical-align: middle;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+
+	color: $loadingColor;
+
+	&::before,
+	&::after {
+		box-sizing: border-box;
+		border: 10px solid transparent;
+		content: '';
+		position: absolute;
+	}
+
+	transition: color 0.25s;
+
+	&::before {
+		animation: animLoadingBefore 4s infinite;
+	}
+
+	&::after {
+		animation: animLoadingAfter 4s infinite;
+	}
+
+	@keyframes animLoadingBefore {
+
+		0% {
+			width: 0;
+			height: 0;
+			top: 0;
+			left: 0;
+			border-top-color: transparent;
+			border-right-color: transparent;
+		}
+
+		12.5% {
+			height: 0;
+			width: 100%;
+			border-top-color: $loadingColor;
+			border-right-color: transparent;
+		}
+
+		25% {
+			height: 100%;
+			border-top-color: $loadingColor;
+			border-right-color: $loadingColor;
+		}
+
+		37.5% {
+			right: 0;
+			width: 100%;
+			height: 100%;
+		}
+
+		50% {
+			right: 0;
+			bottom: 0;
+			width: 100%;
+			height: 100%;
+			border-top-color: $loadingColor;
+			border-right-color: $loadingColor;
+		}
+
+		62.5% {
+			right: 0;
+			bottom: 0;
+			width: 0;
+			height: 100%;
+			border-top-color: transparent;
+			border-right-color: $loadingColor;
+		}
+
+		75% {
+			right: 0;
+			bottom: 0;
+			width: 0;
+			height: 0;
+			border-right-color: transparent;
+		}
+	}
+
+	@keyframes animLoadingAfter {
+
+		0% {
+			width: 0;
+			height: 0;
+			bottom: 0;
+			right: 0;
+			border-bottom-color: transparent;
+			border-left-color: transparent;
+		}
+
+		25% {
+			width: 0;
+			height: 0;
+			bottom: 0;
+			right: 0;
+			border-bottom-color: transparent;
+			border-left-color: transparent;
+		}
+
+		37.5% {
+			width: 100%;
+			height: 0;
+			bottom: 0;
+			right: 0;
+			border-bottom-color: $loadingColor;
+			border-left-color: transparent;
+		}
+
+		50% {
+			width: 100%;
+			height: 100%;
+			bottom: 0;
+			right: 0;
+			top: auto;
+			left: auto;
+			border-left-color: $loadingColor;
+		}
+
+		75% {
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			border-bottom-color: $loadingColor;
+			border-left-color: $loadingColor;
+		}
+
+		87.5% {
+			width: 0;
+			height: 100%;
+			border-bottom-color: transparent;
+			border-left-color: $loadingColor;
+		}
+
+		100% {
+			height: 0;
+			width: 0;
+			top: 0;
+			left: 0;
+			border-left-color: transparent;
+		}
+	}
+}

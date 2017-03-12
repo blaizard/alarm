@@ -1,0 +1,7 @@
+{
+	"name": "Clock",
+	"description": "",
+	"support": {
+		"view": true
+	}
+}

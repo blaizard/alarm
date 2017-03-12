@@ -1,0 +1,28 @@
+.dashboard-config-item {
+	border: 1px solid #fff;
+	border-radius: 10px;
+	width: 150px;
+	height: 150px;
+	margin: 10px;
+	padding: 10px;
+	text-align: center;
+	display: inline-block;
+	float: left;
+	background-color: #000;
+	color: #fff;
+
+	&:hover {
+		background-color: #fff;
+		color: #000;
+	}
+
+	.dashboard-config-icon {
+		line-height: 100px;
+		font-size: 100px;
+	}
+
+	.dashboard-config-text {
+		line-height: 30px;
+		font-size: 20px;
+	}
+}

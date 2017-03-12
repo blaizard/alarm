@@ -1,0 +1,9 @@
+<p>Alarm is a platform designed by xxxx</p>
+<p><b>Version:</b> Hello</p>
+<p><b>Status:</b> Internal Server <span id="aboutServerIcon"><i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i></span></p>
+<p><b>Module List:</b></p>
+<script type="text/javascript">
+	dashboardRestAPI("GET", null, "http://localhost:8080/ping", null, function(isSuccess, message) {
+		$("#aboutServerIcon").html((isSuccess) ? "<i class=\"fa fa-check\" aria-hidden=\"true\"></i>" : "<i class=\"fa fa-times\" aria-hidden=\"true\"></i>");
+	});
+</script>

@@ -1,0 +1,41 @@
+.display {
+	height: 100%;
+	width: 100%;
+	left: 0;
+	top: 0;
+	position: fixed;
+	z-index: 999;
+	background-color: #000;
+	overflow-x: hidden;
+	color: #fff;
+
+	.display-close {
+		position: absolute;
+		color: #fff;
+		top: 0;
+		right: 0;
+		width: 48px;
+		height: 48px;
+		font-size: 64px;
+		cursor: pointer;
+		opacity: .5;
+		margin: 10px;
+
+		background-image: url("close.svg");
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: contain;
+
+		&.previous {
+			background-image: url("previous.svg");
+		}
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+
+	.display-content {
+		width: 700px;
+	}
+}

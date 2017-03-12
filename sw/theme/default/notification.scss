@@ -1,0 +1,31 @@
+#notification {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	left: 0;
+	z-index: 9999;
+
+	.irnotify-group {
+		padding: 20px;
+	
+		&.error {
+			background-color: #a00;
+			color: #fff;
+		}
+
+		&.info {
+			background-color: #36a;
+			color: #fff;
+		}
+
+		&.warning {
+			background-color: #fa0;
+			color: #333;
+		}
+
+		&.debug {
+			background-color: #080;
+			color: #fff;
+		}
+	}
+}

@@ -1,0 +1,7 @@
+{
+	"name": "Audio Player (Spotify, SoundCloud...)",
+	"description": "",
+	"support": {
+		"view": true
+	}
+}
