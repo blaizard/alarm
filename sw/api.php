@@ -2,37 +2,46 @@
 	// Buffer the output in order to send the headers at the end
 	ob_start();
 
-	function formatError($type, $message, $file, $line)
+	function formatError($errorDescriptor)
 	{
-		return $type.": ".$message." on ".$file." (line: ".$line.")";
+		$errorDescriptor = array_merge(array(
+			"type" => E_CORE_ERROR,
+			"message" => "unknown error",
+			"file" => "unknown file",
+			"line" => 0
+		), $errorDescriptor);
+		return $errorDescriptor["type"].": ".$errorDescriptor["message"]." on ".$errorDescriptor["file"]." (line: ".$errorDescriptor["line"].")";
 	}
 
 	function throwError($e)
 	{
 		http_response_code(500);
-		echo formatError("Error", $e->getMessage(), $e->getFile(), $e->getLine());
+		echo formatError(array(
+			"type" => "Error",
+			"message" => $e->getMessage(),
+			"file" => $e->getFile(),
+			"line" => $e->getLine()
+		));
 		die();
 	}
 
 	// Handle fatal errors
 	register_shutdown_function("fatal_handler");
 	function fatal_handler() {
-		$errfile = "unknown file";
-		$errstr  = "shutdown";
-		$errno   = E_CORE_ERROR;
-		$errline = 0;
-
+		$errorDescriptor = array();
 		$error = error_get_last();
 
 		if ($error !== NULL) {
-			$errno   = $error["type"];
-			$errfile = $error["file"];
-			$errline = $error["line"];
-			$errstr  = $error["message"];
+			$errorDescriptor = array(
+				"type" => $error["type"],
+				"message" => $error["message"],
+				"file" => $error["file"],
+				"line" => $error["line"]
+			);
 		}
 
 		http_response_code(500);
-		echo formatError($errfile, $errstr, $errfile, $errline);
+		echo formatError($errorDescriptor);
 		die();
 	}
 
