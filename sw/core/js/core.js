@@ -77,7 +77,6 @@ Core.restapi = function (type, datatype, url, data, callbackSuccess, callbackErr
 			callbackSuccess.call(obj, data);
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
-
 			// Create the error message
 			var errorMsg = "REST API: ";
 

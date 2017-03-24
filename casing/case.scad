@@ -37,12 +37,14 @@ difference(){
    }
 }
 
+usbWidth = 14;
 module usb() {
-    cube([7, 13.2, 14], center = true);
+    cube([7, 13.2, usbWidth], center = true);
 }
 
+powerWidth = 6;
 module power() {
-    cylinder(h=14, r=3, center=true);
+    cylinder(h=14, r=powerWidth/2, center=true);
 }
 
 module prism(l, w, h){
@@ -60,7 +62,7 @@ shift=5;
 screenYOffset = 3;
 
 // Light shading
-lsThickness = 10;
+lsThickness = 6;
 
 module createBox()
     color([0.6, 0.6, 0.6]) union() {
@@ -135,7 +137,7 @@ module case() {
         // Screen
         translate([screenYOffset, 0, (width)/2])
             union() {
-                roundCornersCube(110.76, 192.96, 1, 7);
+                roundCornersCube(110.76+1, 192.96+1, 2, 7);
                 translate([
                         (110.76-100.6)/2-6.63,
                         11.89-(192.96-166.2)/2,
@@ -146,7 +148,8 @@ module case() {
          // Light shader   
         {
             lsAngle=atan(shift/width);
-            lsAdjust=2.5;
+         //   lsAdjust=2.5; // ok for 10
+            lsAdjust=0;
             echo("Angle is ", lsAngle);
             translate([height/2+lsThickness/2+0.001-lsAdjust, 0, -0])
                 rotate([0, -lsAngle, 0])
@@ -164,16 +167,16 @@ module case() {
             yPosition = -height/2 + shift + pcbHeight;
 
             // USB1
-            translate([yPosition + 7/2, 4, -width/2])
+            translate([yPosition + 7/2, -25 -usbWidth/2, -width/2])
                 rotate([0, -lsAngle, 0])
                     usb();
             // USB2
-            translate([yPosition + 7/2, -16, -width/2])
+            translate([yPosition + 7/2, 25 + usbWidth/2, -width/2])
                 rotate([0, -lsAngle, 0])
                     usb();
             
             // Power
-            translate([yPosition + 7/2, 20, -width/2])
+            translate([yPosition + 7, 15, -width/2])
                 rotate([0, -lsAngle, 0])
                     power();
         }
@@ -184,29 +187,38 @@ module case() {
             yPosition = -height/2 + 6;
             lsAngle=atan(shift/width);
             // Small hole
-            translate([yPosition, 3, width/2])
+    /*        translate([yPosition, 3, width/2])
                 rotate([0, -lsAngle, 0])
                     cylinder(h=14, r=0.5, center=true);
             // Big hole
             translate([yPosition, -3, width/2])
                 rotate([0, -lsAngle, 0])
-                    cylinder(h=14, r=1.5, center=true);
+                    cylinder(h=14, r=1.5, center=true);*/
             // Hole for PCB
-            translate([-height/2, 0, (width/2-border)/2])
-                cube([20, length/2, width/2 - border], center=true);
+            translate([-height/2, 0,0])
+                cube([20, length - border*2, width - border*2], center=true);
         }
         
         // Audio case
         {
-            translate([shift, 0, -width/2-0.01])
+            translate([shift, 0, -width/2-0.01-1])
                 audioCase(0.5);
+        }
+        
+        // Holes for proximity touch
+        {
+            translate([height/2-1, 0, -width/2+border])
+                rotate([90, 0, 0])
+                    cylinder(h=length-border*2, r=1, center=true);
         }
     }
 };
 
+
+
 module audioCase(expand) {
-    audioCaseThickness = 1;
-    connectorWidth = 50;
+    audioCaseThickness = 2;
+    connectorWidth = 100;
     connectorHeight = 20;
     connectorAngle = 45;
 
@@ -249,12 +261,13 @@ module audioCase(expand) {
 
 //lightShader();
 case();
-
-/*difference()
+/*
+difference()
 {
     union()
     {
         translate([shift, 0, -width/2-0.01])
+           //     scale([10, 0, 0])
             audioCase(-0.5);
     };
     holes();

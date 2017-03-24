@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.3">
+<eagle version="8.0.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -1262,6 +1262,18 @@
 <smd name="5" x="0" y="1.6" dx="2" dy="0.38" layer="1" rot="R90"/>
 <circle x="-1.8" y="-1.3" radius="0.282840625" width="0.127" layer="21"/>
 </package>
+<package name="DC10LPSOCKET">
+<wire x1="0" y1="0" x2="0" y2="-9" width="0.127" layer="21"/>
+<wire x1="0" y1="0" x2="3.5" y2="0" width="0.127" layer="21"/>
+<wire x1="3.5" y1="0" x2="14.5" y2="0" width="0.127" layer="21"/>
+<wire x1="14.5" y1="0" x2="14.5" y2="-9" width="0.127" layer="21"/>
+<wire x1="14.5" y1="-9" x2="3.5" y2="-9" width="0.127" layer="21"/>
+<wire x1="3.5" y1="-9" x2="0" y2="-9" width="0.127" layer="21"/>
+<wire x1="3.5" y1="0" x2="3.5" y2="-9" width="0.127" layer="21"/>
+<pad name="2" x="11.5" y="-9.5" drill="1.5" diameter="2.54" shape="square"/>
+<pad name="1" x="14.5" y="-4.5" drill="1.5" diameter="2.54" shape="square"/>
+<pad name="3" x="8.5" y="-4.5" drill="1.5" diameter="2.54" shape="square"/>
+</package>
 </packages>
 <symbols>
 <symbol name="ASMT-YWB1-NGJB2">
@@ -1399,6 +1411,15 @@
 <text x="-10.16" y="-7.62" size="1.27" layer="96">&gt;VALUE</text>
 <text x="11.43" y="8.89" size="1.27" layer="95">&gt;NAME</text>
 </symbol>
+<symbol name="POWERPLUG">
+<pin name="VCC" x="7.62" y="2.54" length="middle" rot="R180"/>
+<pin name="GND" x="7.62" y="-2.54" length="middle" rot="R180"/>
+<wire x1="2.54" y1="7.62" x2="2.54" y2="-7.62" width="0.254" layer="94"/>
+<wire x1="2.54" y1="-7.62" x2="-12.7" y2="-7.62" width="0.254" layer="94"/>
+<wire x1="-12.7" y1="-7.62" x2="-12.7" y2="7.62" width="0.254" layer="94"/>
+<wire x1="-12.7" y1="7.62" x2="2.54" y2="7.62" width="0.254" layer="94"/>
+<pin name="DETECT" x="-7.62" y="-12.7" length="middle" rot="R90"/>
+</symbol>
 </symbols>
 <devicesets>
 <deviceset name="ASMT-YWB1-NGJB2">
@@ -1499,6 +1520,23 @@
 <connect gate="G$1" pin="6-VDD" pad="6"/>
 <connect gate="G$1" pin="7-GND" pad="7"/>
 <connect gate="G$1" pin="8-VO-" pad="8"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="POWERPLUG">
+<gates>
+<gate name="G$1" symbol="POWERPLUG" x="5.08" y="0"/>
+</gates>
+<devices>
+<device name="" package="DC10LPSOCKET">
+<connects>
+<connect gate="G$1" pin="DETECT" pad="2"/>
+<connect gate="G$1" pin="GND" pad="1"/>
+<connect gate="G$1" pin="VCC" pad="3"/>
 </connects>
 <technologies>
 <technology name=""/>
