@@ -371,7 +371,7 @@ function screenModuleConfig(containerId, callback)
 
 	/* Create the view if needed */
 	if (!isScreenExists("moduleConfig")) {
-        createScreen("", {
+		createScreen("", {
 			id: "moduleConfig",
 			title: "Module " + containerId,
 			callback: function() {
@@ -385,7 +385,7 @@ function screenModuleConfig(containerId, callback)
 	/* Set the containerId */
 	screenSetArgs(containerId, "moduleConfig");
 	/* Set the loading icon */
-    screenSetContent(dashboardLoading(), "moduleConfig");
+	screenSetContent(dashboardLoading(), "moduleConfig");
 
 	/* Load the attributes */
 	dashboardRestAPI("get", "html", "/api/config/" + moduleType, null, function(is_success, data) {
@@ -412,10 +412,10 @@ function screenModuleConfig(containerId, callback)
 		$(container).append(data);
 
 		/* Update the view */
-        screenSetContent(container, "moduleConfig");
+		screenSetContent(container, "moduleConfig");
 
 		/* Load the container data */
-        screenModuleConfigLoadData(moduleType);
+		screenModuleConfigLoadData(moduleType);
 	});
 }
 

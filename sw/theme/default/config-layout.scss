@@ -3,16 +3,21 @@
 	height: 400px;
 	background-color: #fff;
 
-	[class*='irdashboard-container'] {
+	.container {
 		background-color: #000;
 		color: #fff;
 		cursor: pointer;
 		box-sizing: border-box;
 		padding: 10px;
+		text-align: center;
 	}
 
-	[class*='irdashboard-container']:hover {
+	.container:hover {
 		background-color: #888;
 		color: #000;
+	}
+
+	&.irSpiner ul > li {
+		padding: 0px;
 	}
 }

@@ -1,0 +1,46 @@
+.irDateSelector {
+	height: 200px;
+	text-align: center;
+	white-space: nowrap;
+}
+
+.irDateSelector > div {
+	display: inline-block;
+	height: 200px;
+	overflow-y: hidden;
+}
+
+.irDateSelector > div.day {
+	width: 60px;
+	margin-left: 10px;
+}
+
+.irDateSelector > div.month {
+	width: 200px;
+}
+
+.irDateSelector > div.year {
+	width: 100px;
+	margin-right: 10px;
+}
+
+.irDateSelector > div.hour {
+	width: 60px;
+}
+
+.irDateSelector > div.minute {
+	width: 60px;
+}
+
+.irDateSelector > div.second {
+	width: 60px;
+}
+
+.irDateSelector > div.separator {
+	font-size: 50px;
+	line-height: 200px;
+}
+
+.irDateSelector li {
+	text-align: center;
+}

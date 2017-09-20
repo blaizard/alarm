@@ -101,10 +101,10 @@
 	};
 
 	$.fn.ircontainer.textFill = function(selector) {
-		/* Append span element inside the div */
+		// Append span element inside the div
 		var jq_elt_text;
 		if (typeof selector === "undefined") {
-			/* Check if a container already exists */
+			// Check if a container already exists
 			if ($(this).children("span.ircontainer-textfill").length > 0) {
 				jq_elt_text = $(this).children("span.ircontainer-textfill:first");
 			}
@@ -123,12 +123,13 @@
 		var text_height;
 		var text_width;
 		var font_size = parseInt(jq_elt_text.css("fontSize")) || Math.floor((max_font_size + min_font_size) / 2);
-		/* Compute the new size by binary search */
+
+		// Compute the new size by binary search
 		do {
 			jq_elt_text.css("fontSize", font_size + "px");
 			text_height = jq_elt_text.outerHeight();
 			text_width = jq_elt_text.outerWidth();
-			/* Update the font size boundaries */
+			// Update the font size boundaries
 			if (text_height > max_height || text_width > max_width) {
 				max_font_size = font_size;
 			}
@@ -137,12 +138,12 @@
 			}
 			font_size = Math.floor((max_font_size + min_font_size) / 2);
 		} while (Math.abs(max_font_size - min_font_size) > 2);
-		/* Set the lower boundaries to make sure it fits */
+		// Set the lower boundaries to make sure it fits
 		jq_elt_text.css("fontSize", min_font_size + "px");
 	};
 
 	$.fn.ircontainer.elementFill = function() {
-		/* Auto-size the text */
+		// Auto-size the text
 		$(this).css({
 			height: "100%",
 			width: "100%"
@@ -179,30 +180,46 @@
 		options["id"] = $.fn.ircontainer.create.id++;
 		$(this).addClass("ircontainer-" + options["id"]);
 		$(this).data("ircontainer", options);
-		/* Clear the content */
+
+		// Clear the content
 		$(this).empty();
 		$(this).css({
-			"overflow": "hidden"
-		});
-  		/* Use this ghost element to create vertical alignment */
-  		var before_elt = document.createElement("span");
-  		$(before_elt).css({
-			display: "inline-block",
-			height: "100%",
-			verticalAlign: options["verticalAlign"],
-			marginRight: "-0.25em"
-  		});
-		$(this).append(before_elt);
-		/* Create the container */
-		var elt = document.createElement("div");
-		$(elt).css({
-			display: "inline-block",
-			verticalAlign: options["verticalAlign"],
+			overflow: "hidden",
+			whiteSpace: "nowrap",
 			textAlign: options["horizontalAlign"],
-			width: "100%"
+			//padding: options["margin"] + "px"
 		});
-		$(this).append(elt);
-		/* Populate the view */
+
+		// Use this ghost element to create vertical alignment
+		{
+			var ghostElt = $("<span/>");
+			$(ghostElt).css({
+				display: "inline-block",
+				height: "100%",
+				verticalAlign: options["verticalAlign"],
+				marginRight: "-0.25em"
+	  		});
+			$(this).append(ghostElt);
+		}
+
+		// Create the container view
+		{
+			var viewContainer = $("<div>", {
+				class: "view view-" + options["id"]
+			});
+
+			$(viewContainer).css({
+				display: "inline-block",
+				verticalAlign: options["verticalAlign"],
+				textAlign: options["horizontalAlign"],
+				//width: "100%",
+				overflow: "hidden",
+				whiteSpace: "normal"
+			});
+			$(this).append(viewContainer);
+		}
+
+		// Populate the view
 		$.fn.ircontainer.load.call(this);
 	};
 
@@ -213,18 +230,29 @@
 		Log.error("ircontainer.restapi needs to be implemented");
 	};
 
+	$.fn.ircontainer.getContainerSelector = function(containerId) {
+		return ".ircontainer-" + (containerId) + ":first";
+	};
+
+	$.fn.ircontainer.getViewSelector = function(containerId) {
+		return getContainerSelector() + " div.view-" + (containerId) + ":first";
+	};
+
 	/**
 	 * Update the view of the container
 	 */
 	$.fn.ircontainer.load = function() {
 		var options = $(this).data("ircontainer");
-		// Set the loading icon
-		options["callbackLoad"].call($(this).children("div"));
+
+		options["callbackLoad"].call($(this).children(".view"));
+
+		var data = $.extend(true, {}, options["config"], {
+			"id":  options["id"]
+		});
+
 		// Load the content
-		$.fn.ircontainer.restapi.call(this, "post", "/api/view/" + options["module"], options["config"], function (data) {
-			var content = "<script type=\"text/javascript\">var ircontainerRef = $(\"div.ircontainer-" + options["id"] + ":first\"); </script>";
-			content += data;
-			$(this).children("div").html(content);
+		$.fn.ircontainer.restapi.call(this, "post", "/api/view/" + options["module"], data, function (data) {
+			$(this).append(data);
 		});
 	};
 
@@ -250,6 +278,7 @@
 		module: "clock",
 		verticalAlign: "middle",
 		horizontalAlign: "center",
+		margin: 20,
 		config: [],
 		/**
 		 * List of registered actions. The key is the action ID and the value is the callback

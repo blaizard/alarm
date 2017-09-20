@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+                                             <?xml-stylesheet type='text/xsl' href='Summary.xslt'?><SUMMARY>
+  <DeviceInformation>
+    <DeviceName>ATSAMD21G18A</DeviceName>
+    <DeviceVariant>48</DeviceVariant>
+    <Technology>Self Capacitance</Technology>
+  </DeviceInformation>
+  <SensorInformation TotalSensors="4">
+    <NumberOfButtons>4</NumberOfButtons>
+    <NumberOfWheels>0</NumberOfWheels>
+    <NumberOfSliders>0</NumberOfSliders>
+  </SensorInformation>
+  <ChannelInformation>
+    <TotalChannelsConsumed>4</TotalChannelsConsumed>
+  </ChannelInformation>
+  <ChannelInformationDetailed>
+    <Channel No="0" SeriesResistor="Zero" Prescalar="One" AutoOS="Disable" FilterLevel="16" />
+    <Channel No="1" SeriesResistor="Zero" Prescalar="One" AutoOS="Disable" FilterLevel="16" />
+    <Channel No="2" SeriesResistor="Zero" Prescalar="One" AutoOS="Disable" FilterLevel="16" />
+    <Channel No="3" SeriesResistor="Zero" Prescalar="One" AutoOS="Disable" FilterLevel="16" />
+  </ChannelInformationDetailed>
+  <PinConfiguration>
+    <AvailablePorts>A,B</AvailablePorts>
+    <TotalPinsUsed>5</TotalPinsUsed>
+    <Sensors>
+      <Sensor Name="Button0" ChannelNumber="1" SensingPair="Y0" PortPin="PA2" />
+      <Sensor Name="Button1" ChannelNumber="2" SensingPair="Y1" PortPin="PA3" />
+      <Sensor Name="Button2" ChannelNumber="3" SensingPair="Y2" PortPin="PA4" />
+      <Sensor Name="Button3" ChannelNumber="4" SensingPair="Y3" PortPin="PA5" />
+    </Sensors>
+  </PinConfiguration>
+  <LibraryInformation ToolChainName="GCC">
+    <DefaultLibrary>libsamd21_qtouch_gcc.a</DefaultLibrary>
+  </LibraryInformation>
+  <MoistureGrouping IsEnabled="false" />
+  <SensorMoistureGroupDetail IsEnabled="false" />
+  <MemoryInformation>
+    <DataMemory>
+      <TotalDataMemory>32768</TotalDataMemory>
+      <DataMemoryUsed>845</DataMemoryUsed>
+      <DataMemoryFree>31923</DataMemoryFree>
+    </DataMemory>
+    <CodeMemory>
+      <TotalCodeMemory>262144</TotalCodeMemory>
+      <CodeMemoryUsed>10506</CodeMemoryUsed>
+      <CodeMemoryFree>251638</CodeMemoryFree>
+    </CodeMemory>
+  </MemoryInformation>
+  <ComponentID>qtlib.generic.tmx.qt.at91samd.device</ComponentID>
+  <OtherOptions>
+    <SensorPostProcessingMode>TOUCH_LIBRARY_DRIVEN</SensorPostProcessingMode>
+    <AutoTuning>NONE</AutoTuning>
+    <FilterLevel>Four</FilterLevel>
+    <AutoOS>Zero</AutoOS>
+    <FrequencyMode>NONE</FrequencyMode>
+    <PreScalar>One</PreScalar>
+    <SeriesResistor>Zero</SeriesResistor>
+    <FrequencyHops>One,Two,Three</FrequencyHops>
+    <FrequencyAutoTuneEnabled>Off</FrequencyAutoTuneEnabled>
+    <FrequencyAutoTuneSignalLimit>10</FrequencyAutoTuneSignalLimit>
+    <FrequencyAutoTuneInCount>12</FrequencyAutoTuneInCount>
+    <NoiseMeasurementStatus>Off</NoiseMeasurementStatus>
+    <NoiseMeasurementSignalStabilityLimit>10</NoiseMeasurementSignalStabilityLimit>
+    <NoiseMeasurementNoiseLimit>12</NoiseMeasurementNoiseLimit>
+    <NoiseMeasurementNoiseBufferCount>Five</NoiseMeasurementNoiseBufferCount>
+    <LockoutStatus>SingleKeyLockout</LockoutStatus>
+    <LockoutCountdown>10</LockoutCountdown>
+    <PTCInterruptprioritylevel>Three</PTCInterruptprioritylevel>
+  </OtherOptions>
+</SUMMARY>

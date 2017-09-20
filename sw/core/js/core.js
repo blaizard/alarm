@@ -1,6 +1,15 @@
 var Core = function (container) {
 	this.container = container;
-	irRequire(["Dashboard", "$().ircontainer"], function () {
+	var core = this;
+
+	irRequire(["Dashboard", "$().ircontainer", "Menu", "Irform"], function () {
+
+		Dashboard.init(core.container);
+
+		// Pimp Irform
+		{
+			$().irformArray.defaults.isMove = false;
+		}
 
 		// Update the ircontainer restapi 
 		$().ircontainer.restapi = function (type, url, data, callbackSuccess, callbackError) {
@@ -24,25 +33,25 @@ var Core = function (container) {
 		Dashboard.onLoad = function (container) {
 			Core.loading(container);
 		};
-		Dashboard.onLoadContainer = function (containerId) {
+		Dashboard.onLoadContainer = function(containerId) {
 			// Enable long press action
-			Core.longPress(this, function () {
-				screenModuleConfig(containerId, function () {
+			Core.longPress(this, function() {
+				Menu.moduleConfig(containerId, function() {
 					Dashboard.configSave();
-					Dashboard.load(container);
+					Dashboard.load();
 				});
 			});
 		};
 
 		irRequire(["$().irdashboard"], function () {
 			// Load the dashboard
-			Dashboard.load(container);
+			Dashboard.load();
 		});
 
 		// Add the resize event
 		$(window).resize(function () {
 			// Load the dashboard
-			Dashboard.load(container);
+			Dashboard.load();
 		});
 	});
 };
@@ -51,9 +60,10 @@ var Core = function (container) {
  * Update the display
  */
 Core.prototype.update = function () {
+	var core = this;
 	irRequire("Dashboard", function () {
 		// Reload the display
-		Dashboard.load(this.container);
+		Dashboard.load();
 	});
 };
 
@@ -121,13 +131,16 @@ Core.restapi = function (type, datatype, url, data, callbackSuccess, callbackErr
 			config["contentType"] = "application/json; charset=utf-8";
 		}
 	}
+	console.info(config);
 	$.ajax(config);
 };
 
-Core.loading = function (container) {
+Core.loading = function (container, message) {
 	var html =  "<div class=\"loading\" style=\"display: table; width: 100%; height: 100%;\">"
 			+ "<div style=\"display: table-cell; text-align: center; vertical-align: middle;\">"
-			+ "<span>Loading...</span>"
+			+ "<i class=\"fa fa-circle-o-notch fa-spin fa-3x fa-fw\"></i>"
+			+ "<span class=\"sr-only\">Loading...</span>"
+			+ ((typeof message === "undefined") ? "" : "<br/><br/>" + message)
 			+ "</div></div>";
 	$(container).html(html);
 };
@@ -142,12 +155,15 @@ Core.error = function (container, errorMsg) {
 };
 
 Core.longPress = function (elt, callback) {
-	$(elt).mouseup(function(){
+	$(elt).on("mouseup touchend touchleave touchcancel", function() {
 		clearTimeout(Core.longPress.timer);
 		return false;
-	}).mousedown(function(){
+	}).on("mousedown touchstart", function() {
+		var elt = this;
 		clearTimeout(Core.longPress.timer);
-		Core.longPress.timer = window.setTimeout(callback, 500);
+		Core.longPress.timer = window.setTimeout(function() {
+			callback.call(elt);
+		}, 500);
 		return false; 
 	});
 };

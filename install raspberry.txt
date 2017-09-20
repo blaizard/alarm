@@ -1,0 +1,42 @@
+Follow:
+https://blog.gordonturner.com/2017/07/22/raspberry-pi-full-screen-browser-raspbian-july-2017/
+
+----- setup wifi
+
+----- change password to 1234
+>sudo vim.tiny /etc/pam.d/common-password
+change:
+	password        [success=1 default=ignore]      pam_unix.so sha512 minlen=4
+>passwd
+
+----- install nmcli
+
+>sudo apt-get install network-manager
+>sudo vim.tiny /etc/NetworkManager/NetworkManager.conf
+# edit
+[ifupdown]
+managed=true
+# reboot and set the wifi SSID and password
+>nmcli device wifi con "HAPPPY FAMILY" password "tobiothecat"
+
+---- change background screen to black
+
++ install:
+# The packages to run the alarm
+sudo apt-get install php5-fpm php5 php5-cli php5-json
+
+>sudo vim.tiny .config/lxsession/LXDE-pi/autostart
+---------- This is the content of restart
+
+# Start the server and wait a bit to make sure it is started before chromium
+@nohup /home/pi/alarm/tools/deploy.sh &
+#@sleep 5
+
+# Normal website that does not need any exceptions
+@/usr/bin/chromium-browser --incognito --start-maximized --touch-events=enabled --enable-pinch --kiosk http://localhost:8000
+# Enable mixed http/https content, remember if invalid certs were allowed (ie self signed certs)
+#@/usr/bin/chromium-browser --incognito --start-maximized --kiosk --allow-running-insecure-content --remember-cert-error-decisions http://gordonturner.com
+@unclutter -display :0 -noevents -grab
+@xset s off
+@xset s noblank
+@xset -dpms

@@ -1,0 +1,372 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"e",
+				"e"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"no",
+				"nowrap"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 575.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/blaise/Dropbox/aube/sw",
+		"/C/Users/blaise/Dropbox/aube/sw/core",
+		"/C/Users/blaise/Dropbox/aube/sw/core/js",
+		"/C/Users/blaise/Dropbox/aube/sw/lib",
+		"/C/Users/blaise/Dropbox/aube/sw/modules",
+		"/C/Users/blaise/Dropbox/aube/sw/modules/clock",
+		"/C/Users/blaise/Dropbox/aube/sw/modules/clock/deps",
+		"/C/Users/blaise/Dropbox/aube/sw/modules/weather",
+		"/C/Users/blaise/Dropbox/aube/sw/theme",
+		"/C/Users/blaise/Dropbox/aube/sw/theme/default",
+		"/C/Users/blaise/Dropbox/aube/sw/tools"
+	],
+	"file_history":
+	[
+		"/C/Users/blaise/Dropbox/aube/sw/tools/wifi.sh",
+		"/C/Users/blaise/Dropbox/aube/sw/core/js/irform/irform.date.js",
+		"/C/Users/blaise/Dropbox/aube/sw/core/js/irform/irform.spiner.js",
+		"/C/Users/blaise/Dropbox/aube/sw/modules/clock/module.php",
+		"/C/Users/blaise/Dropbox/simplecms/projects/irform/git/theme/default/layout.scss",
+		"/C/Users/blaise/Dropbox/aube/sw/theme/default/loading.scss",
+		"/C/Users/blaise/Dropbox/aube/sw/core/js/core.js",
+		"/C/Users/blaise/Dropbox/aube/sw/lib/js/jquery.ircontainer.js",
+		"/C/Users/blaise/Dropbox/aube/sw/modules/weather/deps/view.php",
+		"/C/Users/blaise/Dropbox/aube/sw/modules/clock/deps/view.php",
+		"/C/Users/blaise/Dropbox/aube/sw/modules/weather/module.php",
+		"/C/Users/blaise/Dropbox/simplecms/projects/irform/git/theme/default/config.scss",
+		"/C/Users/blaise/Dropbox/simplecms/projects/irform/git/theme/black/config.scss",
+		"/C/Users/blaise/Dropbox/simplecms/projects/irform/git/theme/default/switch.scss",
+		"/C/Users/blaise/Dropbox/simplecms/projects/irform/git/theme/default/icon.css",
+		"/C/Users/blaise/Dropbox/simplecms/projects/irform/git/config.mk",
+		"/C/Users/blaise/Dropbox/simplecms/projects/irform/git/theme/default/checkbox.scss",
+		"/C/Users/blaise/Downloads/icomoon/style.css",
+		"/C/Users/blaise/Dropbox/simplecms/projects/irform/git/theme/default/theme.scss",
+		"/C/Users/blaise/Dropbox/aube/sw/config.mk",
+		"/C/Users/blaise/Dropbox/simplecms/projects/irform/git/theme/default/button.scss",
+		"/C/Users/blaise/Dropbox/simplecms/projects/irform/git/theme/default/main.scss",
+		"/C/Users/blaise/Dropbox/aube/sw/modules/weather/view.php",
+		"/C/Users/blaise/Dropbox/aube/sw/core/js/irform/irform.select.js",
+		"/C/Users/blaise/Dropbox/aube/sw/api.php",
+		"/C/Users/blaise/Dropbox/simplecms/projects/irform/git/theme/aube/main.scss",
+		"/C/Users/blaise/Dropbox/simplecms/projects/irform/git/theme/aube/config.scss",
+		"/C/Users/blaise/Dropbox/aube/sw/core/js/menu.js",
+		"/C/Users/blaise/Dropbox/aube/sw/publish.sh",
+		"/C/Users/blaise/Dropbox/aube/sw/core/php/module.php",
+		"/C/Users/blaise/Dropbox/aube/sw/core/js/irform/irform.date.css",
+		"/C/Users/blaise/Dropbox/aube/sw/index.html",
+		"/C/Users/blaise/Dropbox/simplecms/projects/irform/git/theme/default/input.scss",
+		"/C/Users/blaise/Dropbox/simplecms/projects/irform/git/theme/default/custom.scss",
+		"/C/Users/blaise/Dropbox/simplecms/projects/irform/git/srcs/irform.irexplorer.js",
+		"/C/Users/blaise/Dropbox/simplecms/projects/irform/git/srcs/irform.js",
+		"/C/Users/blaise/Dropbox/simplecms/projects/irform/git/srcs/jquery.irform-array.js",
+		"/C/Users/blaise/Dropbox/simplecms/projects/irform/git/srcs/jquery.irform-custom.js",
+		"/C/Users/blaise/Dropbox/aube/sw/core/js/irform/jquery.irform-custom.js",
+		"/C/Users/blaise/Dropbox/simplecms/projects/jquery-template/git/srcs/jquery.template.module.js",
+		"/C/Users/blaise/Dropbox/aube/sw/theme/default/config-menu.scss",
+		"/C/Users/blaise/Dropbox/aube/sw/core/js/dashboard.js",
+		"/C/Users/blaise/Dropbox/simplecms/projects/irform/git/srcs/jquery.irform-modal.js",
+		"/C/Users/blaise/Dropbox/aube/sw/core/js/irform/irform.spiner.css",
+		"/C/Users/blaise/Dropbox/simplecms/projects/irform/git/example/example.html",
+		"/C/Users/blaise/Dropbox/simplecms/projects/irform/git/theme/default/modal.scss",
+		"/C/Users/blaise/Dropbox/simplecms/projects/irform/git/theme/black/main.scss",
+		"/C/Users/blaise/Dropbox/aube/sw/core/js/irform/irform.custom.css",
+		"/C/Users/blaise/Dropbox/aube/sw/core/js/irform/irform.custom.js",
+		"/C/Users/blaise/Dropbox/simplecms/projects/irform/git/theme/default/notify.scss",
+		"/C/Users/blaise/Dropbox/aube/sw/theme/default/irform.scss",
+		"/C/Users/blaise/Dropbox/simplecms/projects/irform/git/theme/default/array.scss",
+		"/C/Users/blaise/Dropbox/aube/sw/modules/clock/config.php",
+		"/C/Users/blaise/Dropbox/aube/sw/modules (copy)/clock/jquery.irclock.js",
+		"/C/Users/blaise/Dropbox/aube/sw/core/js/script.js",
+		"/C/Users/blaise/Dropbox/aube/sw/modules/clock/deps/jquery.irclock.js",
+		"/C/Users/blaise/Dropbox/aube/sw/core/js/irform/irform.select.css",
+		"/C/Users/blaise/Dropbox/aube/sw/theme/default/main.scss",
+		"/C/Users/blaise/Dropbox/aube/sw/Makefile",
+		"/C/Users/blaise/Dropbox/simplecms/projects/irform/git/Makefile",
+		"/C/Users/blaise/Dropbox/simplecms/projects/irform/git/srcs/jquery.irform-file.js",
+		"/C/Users/blaise/Dropbox/simplecms/projects/irform/git/srcs/jquery.irform-tinymce.js",
+		"/C/Users/blaise/Dropbox/simplecms/projects/irform/git/srcs/jquery.irform-array.tags.js",
+		"/C/Users/blaise/Dropbox/simplecms/projects/irform/git/srcs/irform.notify.js",
+		"/C/Users/blaise/Dropbox/simplecms/projects/Makefile/git/tests/bin/dummy.sh",
+		"/C/Users/blaise/Dropbox/simplecms/projects/Makefile/git/config.mk",
+		"/D/cygwin64/bin/uglifycss",
+		"/D/cygwin64/bin/uglifyjs",
+		"/C/Users/blaise/Dropbox/aube/sw/modules/clock/deps/config.php",
+		"/C/Users/blaise/Dropbox/simplecms/projects/irform/git/srcs/irrequire.min.js",
+		"/C/Users/blaise/Dropbox/test.sh",
+		"/C/Users/blaise/Dropbox/aube/sw/modules/empty/module.php",
+		"/C/Users/blaise/Dropbox/aube/sw/config.json",
+		"/C/Users/blaise/Dropbox/aube/sw/modules/empty/config.php",
+		"/C/Users/blaise/Dropbox/aube/sw/core/js/config.js",
+		"/C/Users/blaise/Dropbox/aube/sw/modules/clock/view.php",
+		"/home/blaise/Dropbox/aube/tobuy.txt",
+		"/home/blaise/Dropbox/aube/sw/core/js/dashboard.js",
+		"/home/blaise/Dropbox/aube/sw/core/js/display.js",
+		"/home/blaise/Dropbox/aube/sw/core/js/script.js",
+		"/home/blaise/Dropbox/aube/sw/modules/clock/module.php",
+		"/home/blaise/Dropbox/aube/sw/core/js/core.js",
+		"/home/blaise/Dropbox/aube/sw/core/php/config.php",
+		"/home/blaise/Dropbox/aube/sw/core/php/module.php",
+		"/home/blaise/Dropbox/aube/sw/modules/clock/info.json",
+		"/home/blaise/Dropbox/aube/sw/modules/clock/jquery.irclock.js",
+		"/home/blaise/Dropbox/aube/sw/core/js/logger.js",
+		"/home/blaise/Dropbox/aube/sw/lib/js/jquery.irdashboard.js",
+		"/home/blaise/Dropbox/aube/sw/lib/js/jquery.ircontainer.js",
+		"/home/blaise/Dropbox/aube/sw/api.php",
+		"/home/blaise/Dropbox/aube/sw/core/js/menu.js",
+		"/home/blaise/Dropbox/aube/sw/core/php/routing.php",
+		"/home/blaise/Dropbox/IrStdBackup/IrStd-Example/IrStd/.gitmodules",
+		"/home/blaise/Dropbox/IrStdBackup/IrStd-Example/.gitmodules",
+		"/home/blaise/Dropbox/trader/IrStd/tests/CMakeLists.txt",
+		"/home/blaise/Dropbox/trader/IrStd/Test/googletest/CMakeLists.txt",
+		"/home/blaise/Dropbox/trader/IrStd/Test/CMakeLists.txt",
+		"/home/blaise/Dropbox/trader/IrStd/Test/Test.cpp",
+		"/home/blaise/Dropbox/trader/IrStd/Test/TestMain.cpp",
+		"/home/blaise/Dropbox/trader/IrStd/CMakeLists.txt",
+		"/home/blaise/Dropbox/trader/IrStd/tests/TestLogger.cpp",
+		"/home/blaise/Dropbox/trader/IrStd/tests/TestMacro.cpp",
+		"/home/blaise/Dropbox/trader/IrStd/Test.hpp",
+		"/media/blaise/0403-0201/case_light.gcode",
+		"/home/blaise/Dropbox/simplecms/.ircms/tools/php/router_script.php",
+		"/home/blaise/Dropbox/simplecms/.ircms/tools/deploy.sh",
+		"/home/blaise/Dropbox/simplecms/.ircms/core/env.php",
+		"/home/blaise/Dropbox/simplecms/deps/php/HTTPProxy/index.html",
+		"/home/blaise/Dropbox/simplecms/deps/php/HTTPProxy/index.php",
+		"/home/blaise/Dropbox/simplecms/index.php",
+		"/home/blaise/Dropbox/simplecms/deps/php/HTTPProxy.php",
+		"/home/blaise/Dropbox/simplecms/index.html",
+		"/home/blaise/test.cpp",
+		"/home/blaise/Dropbox/aube/sw/index.html",
+		"/media/blaise/eda95d8a-9cdd-4224-96d0-890b4791600c/home/pi/alarm/tools/power.py",
+		"/media/blaise/eda95d8a-9cdd-4224-96d0-890b4791600c/home/pi/alarm/stderr.out",
+		"/home/blaise/Dropbox/aube/casing/case.scad",
+		"/home/blaise/Dropbox/Important/Personal/Germany/apt.txt",
+		"/home/blaise/Downloads/eagle-8.0.2/README",
+		"/home/blaise/Dropbox/aube/schematics/.gitignore",
+		"/home/blaise/Dropbox/alarm/srcs/theme/default/main.scss",
+		"/home/blaise/Dropbox/alarm/srcs/theme/default/config-layout.scss",
+		"/home/blaise/Dropbox/simplecms/projects/irform/git/srcs/irform.irexplorer.js",
+		"/home/blaise/Dropbox/alarm/srcs/modules/clock/view.php",
+		"/home/blaise/Dropbox/alarm/srcs/api.php",
+		"/home/blaise/Dropbox/alarm/srcs/index.html",
+		"/home/blaise/Dropbox/alarm/srcs/core/php/module.php",
+		"/home/blaise/Dropbox/alarm/srcs/modules/clock/module.php"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+			"C:\\Users\\blaise\\Dropbox\\aube\\sw\\core"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"copy",
+			"click",
+			"getDeltaY",
+			"getInstance",
+			"throw",
+			"irDate",
+			"setModalDate",
+			"irSelect",
+			"irform-container",
+			"switch",
+			"checkbox",
+			"}\n",
+			"NOP",
+			"MINIFY_JS_CMD",
+			"CHECK_TOOL",
+			"<template>",
+			"consol",
+			"Dashboard.modules",
+			"screenModuleConfigLoadData",
+			"Irform",
+			"core",
+			"screenModuleConfigSaveData",
+			"isValidContainer",
+			"menu",
+			"getId",
+			"m_id",
+			" ircontainer",
+			"m_id",
+			"actionRegister",
+			"merge",
+			"formatError",
+			"screen",
+			"longpress",
+			"isValidContainer",
+			"Loading",
+			"loading",
+			"restapi",
+			"load",
+			"colo",
+			";\n",
+			"('.')",
+			"ajaxErrorToString",
+			"dashboardRestAPI",
+			"crontab",
+			"entry",
+			"defaultOptions",
+			"brief",
+			"descr",
+			"overf"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"irformCustom",
+			"irDate",
+			"irSpiner",
+			"irSelect"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 34.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "main.sublime-project",
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 264.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

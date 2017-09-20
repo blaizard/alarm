@@ -1,30 +1,52 @@
 var Dashboard = function() {
 };
 
+Dashboard.container = null;
 Dashboard.config = null;
 Dashboard.modules = null;
 Dashboard.onLoad = function() {};
-Dashboard.onLoadContainer = function() {};
+Dashboard.onLoadContainer = function (containerId) {};
 Dashboard.restapi = function() {
 	Log.error("Dashboard.restapi needs to be implemented");
 };
 
-Dashboard.load = function(container) {
+Dashboard.init = function(container) {
+	if (Dashboard.container) {
+		throw "Dashboard.init(...) can only be called once";
+	}
 
-	Dashboard.onLoad.call(this, container);
+	Dashboard.container = container;
+}
+
+Dashboard.load = function() {
+
+	if (!Dashboard.container) {
+		throw "Dashboard.init(...) must be called first";
+	}
+
+	var container = Dashboard.container;
+	Dashboard.onLoad.call(this, Dashboard.container);
 
 	// Read the configuration
 	Dashboard.configLoad(function() {
 		// Load the dashboard layout
 		$(container).html(Dashboard.config["layout"]);
-		$(container).irdashboard();
+
+		// Fix the sizes
+		$(container).find(".container").each(function(containerId) {
+			$(this).css({
+				width: $(this).width(),
+				height: $(this).height()
+			});
+		});
+
 		// Load the containers
-		$(container).irdashboard("container").each(function(containerId) {
+		$(container).find(".container").each(function(containerId) {
 			Dashboard.onLoadContainer.call(this, containerId);
 			// Set the content of the container
 			if (Dashboard.isValid(containerId)) {
 				$(this).ircontainer({
-					module: Dashboard.config["containers"][containerId]["module"],
+					module: Dashboard.getModuleType(containerId),
 					verticalAlign: Dashboard.config["containers"][containerId]["verticalAlign"],
 					horizontalAlign: Dashboard.config["containers"][containerId]["horizontalAlign"],
 					config: Dashboard.config["containers"][containerId]
@@ -32,6 +54,16 @@ Dashboard.load = function(container) {
 			}
 		});
 	});
+};
+
+Dashboard.getModuleType = function (containerId) {
+	if (!Dashboard.config) {
+		throw "Dashboard.config must be loaded before calling this function";
+	}
+	if (!Dashboard.isValid(containerId)) {
+		throw "The container id (" + containerId + ") is not valid";
+	}
+	return Dashboard.config["containers"][containerId]["module"];
 };
 
 /**
@@ -73,7 +105,7 @@ Dashboard.configLoad = function (callback) {
  */
 Dashboard.configSave = function (callback) {
 	if (!Dashboard.config) {
-		return;
+		throw "Dashboard.config must be loaded before calling this function";
 	}
 	// Read the configuration
 	Dashboard.restapi("put", "json", "/api/config", Dashboard.config, function(is_success, data) {
@@ -88,9 +120,50 @@ Dashboard.configSave = function (callback) {
 	});
 }
 
+Dashboard.configAttributeLoad = function (attribute) {
+	if (!Dashboard.config) {
+		throw "Dashboard.config must be loaded before calling this function";
+	}
+	return Dashboard.config[attribute];
+};
+
+Dashboard.configAttributeSave = function (attribute, value, callback) {
+	if (!Dashboard.config) {
+		throw "Dashboard.config must be loaded before calling this function";
+	}
+	Dashboard.config[attribute] = value;
+	Dashboard.configSave(callback);
+};
+
+Dashboard.configModuleSave = function (containerId, config, callback) {
+	if (!Dashboard.config) {
+		throw "Dashboard.config must be loaded before calling this function";
+	}
+	Dashboard.config["containers"][containerId] = config;
+	Dashboard.configSave(callback);
+};
+
+Dashboard.configModuleLoad = function (containerId) {
+	if (!Dashboard.config) {
+		throw "Dashboard.config must be loaded before calling this function";
+	}
+	return Dashboard.config["containers"][containerId];
+};
+
+/**
+ * Automatically resize the given module
+ */
+Dashboard.moduleResize = function (containerId) {
+	if (!Dashboard.isValid(containerId)) {
+		throw "Resize function can only be called on valid containers (id=" + containerId + ")";
+	}
+	alert("Resizing " + containerId);
+};
+
 Dashboard.isValid = function (containerId) {
 	return (typeof Dashboard.config["containers"][containerId] === "object"
 			&& Dashboard.config["containers"][containerId]
 			&& typeof Dashboard.config["containers"][containerId]["module"] !== "undefined"
-			&& Dashboard.config["containers"][containerId]["module"] != "empty");
+			&& Dashboard.config["containers"][containerId]["module"] != "empty"
+			&& typeof Dashboard.modules[Dashboard.config["containers"][containerId]["module"]] === "object");
 }

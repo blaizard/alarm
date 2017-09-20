@@ -95,12 +95,11 @@
 
 	$app->route("get", "/api/config/{module}", function($vars) {
 		$module_id = $vars["module"];
-		// Check if the module exists
-		header('Content-type: text/html');
-		if (is_dir("modules/".$module_id) && is_file("modules/".$module_id."/config.php")) {
-			header('Content-type: text/html');
-			include("modules/".$module_id."/config.php");
-		}
+		// Get the module
+		header('Content-type: application/json');
+		$module = Module::getInstance($module_id);
+		$config = $module->config();
+		echo json_encode($config);
 	});
 
 	/**
@@ -111,11 +110,57 @@
 		$module_id = $vars["module"];
 		// Check if the module exists
 		header('Content-type: text/html');
-		if (is_dir("modules/".$module_id) && is_file("modules/".$module_id."/view.php")) {
-			include("modules/".$module_id."/view.php");
+		$module = Module::getInstance($module_id);
+		$module->view();
+	});
+
+	/**
+	 * api/restart | shutdown
+	 * Restart or shutdown the system
+	 */
+	$app->route("post", "/api/restart", function($vars) {
+		exec("shutdown -r now", $output, $return_var);
+		if ($return_var != 0) {
+			throwError(new Exception(join(", ", $output)));
 		}
-		else {
-			throw "This module has no viewer";
+	});
+	$app->route("post", "/api/shutdown", function($vars) {
+		exec("shutdown -h now", $output, $return_var);
+		if ($return_var != 0) {
+			throwError(new Exception(join(", ", $output)));
+		}
+	});
+
+	/**
+	 * wifi related actions
+	 */
+	$app->route("get", "/api/wifi", function($vars) {
+		// Check if the module exists
+		exec('./tools/wifi.sh list', $output, $return_var);
+		if ($return_var != 0) {
+			throwError(new Exception("Command failed to execute"));
+		}
+		$ssidList = array();
+		for ($i = 0; $i < count($output); $i += 4) {
+			array_push($ssidList, array(
+				"ssid" => $output[$i],
+				"strength" => $output[$i + 1],
+				"selected" => ($output[$i + 2]) ? true : false,
+				"protected" => ($output[$i + 3]) ? true : false
+			));
+		}
+
+		header('Content-type: application/json');
+		echo json_encode($ssidList);
+	});
+
+	$app->route("get", "/api/wifi/{ssid}/{password}", function($vars) {
+		$ssid = urldecode($vars["ssid"]);
+		$password = urldecode($vars["password"]);
+		// Check if the module exists
+		exec("./tools/wifi.sh connect \"".$ssid."\" \"".$password."\"", $output, $return_var);
+		if ($return_var != 0) {
+			throwError(new Exception(join(", ", $output)));
 		}
 	});
 
@@ -126,14 +171,20 @@
 		throwError($e);
 	}
 
-	// Output the content and end the connection
+	// Output the content at end the connection
 	$content = ob_get_contents();
 	ob_end_clean();
-	$content_length = strlen($content);
+
+	if (!$content)
+	{
+		// Workaround, not sure why we need this
+		echo " ";
+	}
+
+	$contentLength = strlen($content);
 	header("Connection: close");
-	header("Content-Length: $content_length");
+	header("Content-Length: $contentLength");
 	echo $content;
 	ob_flush();
 	die();
-
 ?>

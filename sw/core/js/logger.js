@@ -89,12 +89,7 @@ Log.error = function(msg) {
 };
 
 Log.debug = function(msg) {
-	if (Log.ready) {
-		Logger.debug(msg);
-	}
-	else {
-		console.log(msg);
-	}
+	console.log(msg);
 };
 
 Log.warn = function(msg) {

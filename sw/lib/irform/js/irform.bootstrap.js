@@ -1,4 +1,4 @@
-/* irform.bootstrap.js (2016.12.27) by Blaise Lengrand
+/* irform.bootstrap.js (2017.08.22) by Blaise Lengrand
  */
 /* irrequire.min.js (2016.11.04) by Blaise Lengrand
  */
@@ -115,9 +115,7 @@ Irform.defaultOptions = {
 			});
 			var list = options.list;
 			for (var i in list) {
-				var checkbox = (list[i] instanceof Array) ?
-						createCheckbox(list[i][0], list[i][1], options.inline)
-						: createCheckbox(list[i], list[i], options.inline);
+				var checkbox = createCheckbox(((typeof i == "string") ? i : list[i]), list[i], options.inline);
 				$(container).append(checkbox);
 			}
 
@@ -157,7 +155,7 @@ Irform.defaultOptions = {
 				name: name,
 				class: "irform",
 			});
-			$(button).text(options.value || "Submit");	
+			$(button).html(options.value || "Submit");	
 			var obj = this;
 			$(button).click(function() {
 				obj.submit(options.callback);
@@ -174,7 +172,7 @@ Irform.defaultOptions = {
 				var opt = $("<option>", {
 					value: (list instanceof Array) ? list[name] : name
 				});
-				$(opt).text(list[name]);
+				$(opt).html(list[name]);
 				$(select).append(opt);
 			}
 			return select;
@@ -185,6 +183,10 @@ Irform.defaultOptions = {
 	 */
 	defaultType: "input",
 	/**
+	 * Display the caption
+	 */
+	caption: true,
+	/**
 	 * The wrapper to go around the field and keep a common consistency
 	 * \param elt
 	 * \param options
@@ -192,15 +194,19 @@ Irform.defaultOptions = {
 	 */
 	wrapper: function(elt, options/*, name*/) {
 		var wrapper = $("<div>");
-		var div = $("<div>", {
-			class: "irform-caption"
-		});
-		$(div).text(options.caption);
+		// Set the caption
+		if (this.options.caption) {
+			var div = $("<div>", {
+				class: "irform-caption"
+			});
+			$(div).text(options.caption);
+			$(wrapper).append(div);
+		}
+		// Set the value
 		var value = $("<div>", {
 			class: "irform-elements"
 		});
 		$(value).append(elt);
-		$(wrapper).append(div);
 		$(wrapper).append(value);
 		return wrapper;
 	},
@@ -766,6 +772,7 @@ Irform.set = function (selector, values, callback) {
 		return nearestMatch.length == 0 || ($(selector).find(nearestMatch).length == 0 && $(selector).filter(nearestMatch).length == 0);
 	});
 
+	var elementProcessed = 0;
 	// Set their values
 	$(list).each(function() {
 		var key = $(this).prop("name") || $(this).attr("name");
@@ -795,8 +802,19 @@ Irform.set = function (selector, values, callback) {
 				}
 				$(this).trigger("change");
 			});
+
+			// Mark this element as proceed by removing it
+			delete values[key];
+			elementProcessed++;
 		}
 	});
+
+	// If the value is not empty, it might mean that some of the values have not been proceed
+	// in this case, re-iterate with the remaing values
+	if (!jQuery.isEmptyObject(values) && elementProcessed)
+	{
+		Irform.set(selector, values, callback);
+	}
 }
 
 /**
@@ -842,6 +860,39 @@ Irform.get = function (selector, callback) {
 
 	return data;
 }
+
+/**
+ * Update the jQuery val attribute
+ */
+Irform.jQueryHookVal = function (selector, readFct, writeFct) {
+	// Override the val function to handle this element
+	var originalVal = jQuery.fn.val;
+	jQuery.fn.val = function(value) {
+		// Read
+		if (!arguments.length) {
+			if ($(this).is(selector)) {
+				return readFct.call(this);
+			}
+			// Callback the original function
+			return originalVal.apply(this, arguments);
+		}
+		// Write
+		// Make this variable local to pas it through the each function, seems to work only this way
+		var v = value;
+		$(this).each(function() {
+			// Hack to make the variable visiable in this scope
+			var value = v;
+			if ($(this).is(selector)) {
+				writeFct.call(this, value);
+			}
+			else {
+				// Callback the original function
+				originalVal.call($(this), value);
+			}
+		});
+		return this;
+	};
+};
 
 /**
  * Clear the form. This is a static function.
@@ -1144,6 +1195,9 @@ Irnotify.defaults = {
 		if (typeof template === "function") {
 			$(content).html(template.call(obj, item));
 		}
+		else if (typeof template === "object") {
+			new Irform(content, template, options.irformOptions);
+		}
 		else {
 			$(content).html($(template).clone(true, true));
 		}
@@ -1182,19 +1236,21 @@ Irnotify.defaults = {
 		$(obj).append(content);
 
 		// Set an event to add new items
-		$(obj).on("array-add", function() {
+		$(obj).on("array-add", function(e) {
+			e.stopPropagation();
 			$.fn.irformArray.add.call(obj);
 		});
 
 		// Set an event to clear all items
-		$(obj).on("array-empty", function() {
+		$(obj).on("array-empty", function(e) {
+			e.stopPropagation();
 			$.fn.irformArray.clear.call(obj);
 		});
 
 		// Set the add button
 		if (options.isAdd) {
 			var add = $("<div>", {
-				class: "irform-array-add",
+				class: "irform-array-add", 
 				style: "display:inline-block;"
 			});
 			$(add).html(options.add);
@@ -1224,6 +1280,11 @@ Irnotify.defaults = {
 		 * The template to be used for the item
 		 */
 		template: "<input class=\"irform\" type=\"text\" name=\"text\" />",
+		/**
+		 * Customize the irform options of one item. This is used only if the template is
+		 * a irform object.
+		 */
+		irformOptions: {},
 		/**
 		 * Display the element items inline
 		 */
@@ -1274,55 +1335,39 @@ Irnotify.defaults = {
 			return value;
 		}
 	};
-
-	// Override the val function to handle this element
-	var originalVal = $.fn.val;
-	$.fn.val = function(value) {
-		// Read
-		if (!arguments.length) {
-			if ($(this).hasClass("irform-array")) {
-				var value = [];
-				$(this).children(".irform-array-content:first").children(".irform-array-item").each(function(i) {
-					value[i] = Irform.get(this);
-				});
-				var options = $(this).data("irformArray");
-				return options.hookValRead.call(this, value);
-			}
-			// Callback the original function
-			return originalVal.apply(this, arguments);
-		}
-		// Write
-		// Make this variable local to pas it through the each function, seems to work only this way
-		var v = value;
-		$(this).each(function() {
-			// Hack to make the variable visiable in this scope
-			var value = v;
-			if ($(this).hasClass("irform-array")) {
-				var options = $(this).data("irformArray");
-				// Callback used to update the value if needed
-				value = options.hookValWrite.call(this, value);
-				$(this).trigger("array-empty");
-				for (var i in value) {
-					$(this).trigger("array-add");
-					var selector = $(this).children(".irform-array-content:first").children(".irform-array-item:last");
-					Irform.set(selector, value[i]);
-				}
-			}
-			else {
-				// Callback the original function
-				originalVal.call($(this), value);
-			}
-		});
-		return this;
-	};
 })(jQuery);
+
+// Hook to the jQuery.fn.val function
+Irform.jQueryHookVal(".irform-array",
+	/*readFct*/function() {
+		var value = [];
+		$(this).children(".irform-array-content:first").children(".irform-array-item").each(function(i) {
+			value[i] = Irform.get(this);
+		});
+		var options = $(this).data("irformArray");
+		return options.hookValRead.call(this, value);
+	},
+	/*writeFct*/function(value) {
+		var options = $(this).data("irformArray");
+		// Callback used to update the value if needed
+		value = options.hookValWrite.call(this, value);
+		$(this).trigger("array-empty");
+		for (var i in value) {
+			$(this).trigger("array-add");
+			var selector = $(this).children(".irform-array-content:first").children(".irform-array-item:last");
+			Irform.set(selector, value[i]);
+		}
+	}
+);
 
 // Add the module to Irform
 Irform.defaultOptions.fields.array = function(name, options) {
 	var div = $("<div>");
 	$(div).irformArray({
 		name: name,
-		template: options.template
+		template: options.template,
+		inline: options.inline,
+		irformOptions: options.irformOptions
 	});
 	return div;
 };(function($) {
@@ -1438,6 +1483,120 @@ Irform.defaultOptions.fields.tags = function(name) {
 	div.irformArrayTags({name: name});
 	return div;
 };
+/**
+ * jQuery Module Template
+ *
+ * This template is used for jQuery modules.
+ *
+ */
+
+(function($) {
+	/**
+	 * \brief .\n
+	 * Auto-load the irformCustom modules for the tags with a data-irformCustom field.\n
+	 * 
+	 * \alias jQuery.irformCustom
+	 *
+	 * \param {String|Array} [action] The action to be passed to the function. If the instance is not created,
+	 * \a action can be an \see Array that will be considered as the \a options.
+	 * Otherwise \a action must be a \see String with the following value:
+	 * \li \b create - Creates the object and associate it to a selector. \code $("#test").irformCustom("create"); \endcode
+	 *
+	 * \param {Array} [options] The options to be passed to the object during its creation.
+	 * See \see $.fn.irformCustom.defaults a the complete list.
+	 *
+	 * \return {jQuery}
+	 */
+	$.fn.irformCustom = function(arg, data) {
+		var retval;
+		// Go through each objects
+		$(this).each(function() {
+			retval = $().irformCustom.x.call(this, arg, data);
+		});
+		// Make it chainable, or return the value if any
+		return (typeof retval === "undefined") ? $(this) : retval;
+	};
+
+	/**
+	 * This function handles a single object.
+	 * \private
+	 */
+	$.fn.irformCustom.x = function(arg, data) {
+		// Load the default options
+		var options = $.fn.irformCustom.defaults;
+
+		// --- Deal with the actions / options ---
+		// Set the default action
+		var action = "create";
+		// Deal with the action argument if it has been set
+		if (typeof arg === "string") {
+			action = arg;
+		}
+		// If the module is already created and the action is not create, load its options
+		if (action != "create" && $(this).data("irformCustom")) {
+			options = $(this).data("irformCustom");
+		}
+		// If the first argument is an object, this means options have
+		// been passed to the function. Merge them recursively with the
+		// default options.
+		if (typeof arg === "object" || action == "create") {
+			options = $.extend(true, {}, options, arg);
+		}
+		// Store the options to the module
+		$(this).data("irformCustom", options);
+
+		// Handle the different actions
+		switch (action) {
+		// Create action
+		case "create":
+			$.fn.irformCustom.create.call(this);
+			break;
+		};
+	};
+
+	$.fn.irformCustom.create = function() {
+		$(this).addClass("irform irform-custom");
+		$(this).html("&nbsp;");
+	};
+
+	/**
+	 * \brief Default options, can be overwritten. These options are used to customize the object.
+	 * Change default values:
+	 * \code $().irformCustom.defaults.theme = "aqua"; \endcode
+	 * \type Array
+	 */
+	$.fn.irformCustom.defaults = {
+		value: null,
+		/**
+		 * Hook called once the element value is writen to it.
+		 */
+		hookValWrite: function(value) {
+			return [value, value];
+		},
+		/**
+		 * Hook called once the element value is read.
+		 */
+		hookValRead: function(value) {
+			return value;
+		}
+	};
+
+})(jQuery);
+
+// Hook to the jQuery.fn.val function
+Irform.jQueryHookVal(".irform-custom",
+	/*readFct*/function() {
+		var options = $(this).data("irformCustom");
+		return options.hookValRead.call(this, options.value);
+	},
+	/*writeFct*/function(value) {
+		var options = $(this).data("irformCustom");
+		var values = options.hookValWrite.call(this, value);
+		options.value = values[0];
+		$(this).data("irformCustom", options);
+		$(this).html(values[1]);
+	}
+);
 /**
  * Convert an element into an array that can be used in a form
  */
@@ -1638,25 +1797,17 @@ Irform.defaultOptions.fields.tags = function(name) {
 			]
 		}
 	};
-
-	/* Override the val function to handle this element */
-	var originalVal = $.fn.val;
-	$.fn.val = function(value) {
-		if (arguments.length) {
-			$(this).each(function() {
-				if ($(this).hasClass("irform-tinymce")) {
-					return tinyMCE.get($(this).prop("id")).setContent(value);
-				}
-				return originalVal.call(this, value);
-			});
-			return $(this);
-		}
-		if ($(this).hasClass("irform-tinymce")) {
-			return tinyMCE.get($(this).prop("id")).getContent();
-		}
-		return originalVal.apply(this, arguments);
-	};
 })(jQuery);
+
+// Hook to the jQuery.fn.val function
+Irform.jQueryHookVal(".irform-tinymce",
+	/*readFct*/function() {
+		return tinyMCE.get($(this).prop("id")).getContent();
+	},
+	/*writeFct*/function(value) {
+		return tinyMCE.get($(this).prop("id")).setContent(value);
+	}
+);
 
 /* Add the module to Irform */
 Irform.defaultOptions.fields.htmleditor = function(name, options, callback) {
@@ -1917,6 +2068,9 @@ Irform.defaultOptions.fields.file = function(name, options) {
 		case "create":
 			$.fn.irformModal.create.call(this);
 			break;
+		case "close":
+			$.fn.irformModal.close.call(this);
+			break;
 		};
 	};
 
@@ -1924,20 +2078,75 @@ Irform.defaultOptions.fields.file = function(name, options) {
 	 * \brief Default options, can be overwritten.
 	 */
 	$.fn.irformModal.defaults = {
-		zIndex: 99999
+		/**
+		 * \brief Default z-index
+		 */
+		zIndex: 99999,
+		/**
+		 * \brief Enable feature to close the window when click outise
+		 */
+		closeOnClickOutside: true,
+		/**
+		 * If the add button should be implemented
+		 */
+		isCancel: false,
+		/**
+		 * \brief Callback to be called once the user validates the modal
+		 */
+		onValidate: null,
+		/**
+		 * HTML to be used for the validate button
+		 */
+		validate: "<button class=\"irform\" type=\"button\"><span class=\"icon-check\"></span>&nbsp;Validate</button>",
+		/**
+		 * HTML to be used for the cancel button
+		 */
+		cancel: "<button class=\"irform\" type=\"button\"><span class=\"icon-cross\"></span>&nbsp;Cancel</button>",
 	};
 
 	$.fn.irformModal.create = function() {
 		// Options of the current irformModal
+		var obj = this;
 		var options = $(this).data("irformModal");
 
 		var modal = $("<div>", {
+			class: "irform-modal-container"
+		});
+
+		var content = $("<div>", {
 			class: "irform-modal-content"
 		});
-		$(modal).append(this);
-		$(modal).click(function(e) {
-			e.stopPropagation();
+		$(content).append(this);
+		$(modal).append(content);
+
+		// Add controls
+		var control = $("<div>", {
+			class: "irform-modal-control"
 		});
+
+		// Cancel button
+		if (options.isCancel) {
+			var cancel = $("<span>");
+			$(cancel).html(options.cancel);
+			$(cancel).click(function() {
+				$.fn.irformModal.close.call(obj);
+			});
+			$(control).append(cancel);
+		}
+
+		// Validate button
+		if (options.onValidate) {
+			var validate = $("<span>");
+			$(validate).html(options.validate);
+			$(validate).click(function() {
+				var options = $(obj).data("irformModal");
+				options.onValidate.call(obj);
+				$.fn.irformModal.close.call(obj);
+			});
+			$(control).append(validate);
+		}
+
+		$(modal).append(control);
 
 		var container = $("<div>", {
 			class: "irform-modal"
@@ -1958,10 +2167,27 @@ Irform.defaultOptions.fields.file = function(name, options) {
 		$(this).data("irformModal", options);
 
 		// Remove the element on click
-		var obj = this;
-		$(container).click(function() {
-			$.fn.irformModal.close.call(obj);
-		});
+		if (options.closeOnClickOutside) {
+			$(container).data("irformModal", 0);
+			$(container).mousedown(function(e) {
+				$(this).data("irformModal", e);
+			}).mouseup(function(e) {
+				var prevE = $(this).data("irformModal");
+				if (prevE && Math.abs(prevE.pageX - e.pageX) < 5 && Math.abs(prevE.pageY - e.pageY) < 5) {
+					e.preventDefault();
+					$.fn.irformModal.close.call(obj);
+				}
+				$(this).data("irformModal", 0);
+			});
+			// To make sure the events are not considered on the modal
+			$(modal).mousedown(function(e) {
+				e.stopPropagation();
+				return false;
+			}).mouseup(function(e) {
+				e.stopPropagation();
+				return false;
+			});
+		}
 
 		// Append the modal
 		$("body").append(container);
@@ -1971,7 +2197,7 @@ Irform.defaultOptions.fields.file = function(name, options) {
 	/**
 	 * This function closes the dialog
 	 */
-	$.fn.irformModal.close = function () {
+	$.fn.irformModal.close = function() {
 		// Options of the current irformModal
 		var options = $(this).data("irformModal");
 		$(options.container).remove();
@@ -1979,57 +2205,7 @@ Irform.defaultOptions.fields.file = function(name, options) {
 	}
 
 })(jQuery);
-irRequire("IrexplorerDialog", function() {
-	/**
-	 * This file is use to map the irform with the Irexplorer
-	 */
-	var IrformFileIrexplorer = function(callback, presetOptions) {
-		if (typeof options === "undefined") {
-			options = {};
-		}
-		// Update the file type if set i the global options
-		var options = $(this).data("irformFile");
-		if (options && options.fileType) {
-			presetOptions = $.extend(true, presetOptions, {irexplorer: {showType: ["folder", options.fileType]}});
-		}
-
-		// Launch the explorer
-		new IrexplorerDialog($.extend(true, {}, {
-				relative: true,
-				onValidate: function(path) {
-					callback(path);
-				}
-			}, presetOptions));
-	};
-
-	/* Override default options */
-	$().irformTinymce.defaults.callbackBrowser = function(type, callback) {
-		// Change mode
-		var mode = "file";
-		switch (type) {
-		case "image":
-			mode = "image";
-			break;
-		}
-		IrformFileIrexplorer(callback, {mode: mode});
-	};
-	/* Add support for the irform file */
-	$().irformFile.defaults.buttonList.push("browse");
-	$().irformFile.defaults.presets["browse"] = {
-		caption: "Browse",
-		action: IrformFileIrexplorer
-	};
-	$().irformFile.defaults.presets["image"] = {
-		caption: "Select Image",
-		options: {mode: "image"},
-		action: IrformFileIrexplorer
-	};
-	$().irformFile.defaults.presets["directory"] = {
-		caption: "Select Directory",
-		options: {mode: "directory"},
-		action: IrformFileIrexplorer
-	};
-}, null, 0);// Update the form layout
+// Update the form layout
 Irform.defaultOptions.hookInit = function() {
 	// Make sure the container is a form, if not create one and update the container
 	if (!$(this.container).is("form")) {

@@ -1,0 +1,59 @@
+#irKeyboard {
+	background-color: #000;
+	width: 100%;
+	z-index: 999999;
+	position: fixed;
+	bottom: 0px;
+
+	display:flex;
+	flex-direction: column;
+	justify-content:space-around;
+}
+
+#irKeyboard .row {
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+	justify-content: space-between;
+}
+
+#irKeyboard .key {
+	color: #000;
+	background-color: #fff;
+	min-width: 50px;
+	min-height: 50px;
+	font-size: 32;
+	line-height: 50px;
+	text-align: center;
+	align-items: center;
+	justify-content: center;
+	flex: 1;
+	margin: 10px;
+
+	cursor: pointer;
+	-webkit-user-select: none; 
+	-moz-user-select: none;    
+	-ms-user-select: none;     
+	user-select: none;
+}
+
+#irKeyboard .key i {
+	height: 50px;
+	line-height: 50px;
+}
+
+#irKeyboard .key small {
+	font-size: 0.6em;
+}
+
+#irKeyboard .key:hover {
+	color: #fff;
+	background-color: #000;
+}
+
+/* Special layout for specific keyboards */
+
+#irKeyboard.special .row-3 .key-0,
+#irKeyboard.special .row-3 .key-2 {
+	flex: 0.1;
+}

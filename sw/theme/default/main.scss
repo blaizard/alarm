@@ -14,7 +14,8 @@
 
 // Main window
 html,
-body {
+body,
+table {
 	margin: 0;
 	padding: 0;
 	width: 100%;
@@ -36,10 +37,23 @@ body {
 	font-weight: 100;
 }
 
+#content > table {
+	table-layout: fixed;
+}
+
+#content > table td {
+	overflow: hidden;
+	white-space: nowrap;
+}
+
 // Content
 #content {
 	width: 100%;
 	height: 100%;
+}
+
+#content,
+#content table {
 	color: #fff;
 	background-color: #000;
 }

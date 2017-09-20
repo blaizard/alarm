@@ -104,5 +104,5 @@ Display.prototype.setContent = function (content) {
  * Get the content of the display. Return the elt itself.
  */
 Display.prototype.getContent = function () {
-	return $(selector).children(".display-content");
+	return $(this.main).children(".display-content");
 }

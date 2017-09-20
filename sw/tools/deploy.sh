@@ -10,7 +10,7 @@ require () {
 			fail=1
 			echo -ne "\`$1' is missing"
 			if [ "$2" ]; then
-                echo -ne ": $2"
+				echo -ne ": $2"
 			fi
 			echo -ne "\n"
 		fi
@@ -24,5 +24,9 @@ require <<EOF
 php "Please install 'apt-get install php5-fpm php5 php5-cli php5-json'"
 EOF
 
+SCRIPT_DIR="$( cd "$( dirname "$0" )" && pwd )"
+cd "$SCRIPT_DIR"
+
 echo "Connect to the server: http://127.0.0.1:8000/"
 php -S localhost:8000 -t ../ php_router_script.php
+#php -S 10.0.0.104:8000 -t ../ php_router_script.php

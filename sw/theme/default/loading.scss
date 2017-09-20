@@ -9,7 +9,7 @@ $loadingColor: #fff;
 	overflow: hidden;
 
 	color: $loadingColor;
-
+/*
 	&::before,
 	&::after {
 		box-sizing: border-box;
@@ -147,5 +147,5 @@ $loadingColor: #fff;
 			left: 0;
 			border-left-color: transparent;
 		}
-	}
+	}*/
 }

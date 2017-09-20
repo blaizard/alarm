@@ -37,12 +37,12 @@ difference(){
    }
 }
 
-usbWidth = 14;
+usbWidth = 15;
 module usb() {
-    cube([7, 13.2, usbWidth], center = true);
+    cube([7, 15, usbWidth], center = true);
 }
 
-powerWidth = 6;
+powerWidth = 7;
 module power() {
     cylinder(h=14, r=powerWidth/2, center=true);
 }
@@ -54,15 +54,15 @@ module prism(l, w, h){
     );
 }
 
-height=125;
+height=125+4;
 length=200;
 width=20;
 border=3;
 shift=5;
-screenYOffset = 3;
+screenYOffset = 3+2;
 
 // Light shading
-lsThickness = 6;
+lsThickness = 3;
 
 module createBox()
     color([0.6, 0.6, 0.6]) union() {
@@ -80,15 +80,20 @@ module createBox()
 module holes()
 {
     holesBorder = 20;
-    for (y=[-height/2+holesBorder+10:5:height/2-holesBorder])
-        for (x=[-length/2+holesBorder:5:length/2-holesBorder])
+    for (y=[-height/2+holesBorder+10:10:height/2-holesBorder])
+        for (x=[-length/2+holesBorder:10:length/2-holesBorder])
             translate([y, x, -width/2+border/2])
                 cube([4, 4, border+2], center=true);
+    // Memory card access
+    translate([5, 40, -width/2+border/2])
+        cube([50, 50, border+2], center=true);
 }
-
-module lightShader() {
-    lsWidth = sqrt(width*width + shift*shift);
     
+
+module lightShader(addToWidth, addToLength) {
+    lsWidth = sqrt(width*width + shift*shift) + addToWidth;
+    lsLength = length + addToLength;
+
     // Offset due to the inclination of the case
     lsAngle = atan(shift/width);   
     lsOffset = tan(lsAngle)*lsThickness;
@@ -96,17 +101,17 @@ module lightShader() {
     
     color([1, 0.5, 0.5])
         rotate([180, 0, 90])
-            translate([-length/2, -lsThickness, -lsWidth/2])
+            translate([-lsLength/2, -lsThickness, -lsWidth/2])
                 union() {
                     polyhedron(
                         points = [
                             [border,  0,  border - lsOffset ],  //0 *
-                            [length - border,  0,  border - lsOffset],  //1 *
-                            [length,  lsThickness,  0 ],  //2
+                            [lsLength - border,  0,  border - lsOffset],  //1 *
+                            [lsLength,  lsThickness,  0 ],  //2
                             [0,  lsThickness,  0 ],  //3
                             [border,  0,  lsWidth - border - lsOffset ],  //4 *
-                            [length - border,  0,  lsWidth - border - lsOffset],  //5 *
-                            [length,  lsThickness,  lsWidth ],  //6
+                            [lsLength - border,  0,  lsWidth - border - lsOffset],  //5 *
+                            [lsLength,  lsThickness,  lsWidth ],  //6
                             [0,  lsThickness,  lsWidth ]   //7
                         ],
                         faces = [
@@ -153,7 +158,7 @@ module case() {
             echo("Angle is ", lsAngle);
             translate([height/2+lsThickness/2+0.001-lsAdjust, 0, -0])
                 rotate([0, -lsAngle, 0])
-                    lightShader();
+                    lightShader(0, 0);
         }
         
         // Holes
@@ -163,20 +168,20 @@ module case() {
         union()
         {
             lsAngle=atan(shift/width);
-            pcbHeight = 5;
+            pcbHeight = 5-2;
             yPosition = -height/2 + shift + pcbHeight;
 
             // USB1
-            translate([yPosition + 7/2, -25 -usbWidth/2, -width/2])
+            translate([yPosition + 7/2, -25 -usbWidth/2+1-2, -width/2])
                 rotate([0, -lsAngle, 0])
                     usb();
             // USB2
-            translate([yPosition + 7/2, 25 + usbWidth/2, -width/2])
+            translate([yPosition + 7/2, 25 + usbWidth/2-1, -width/2])
                 rotate([0, -lsAngle, 0])
                     usb();
             
             // Power
-            translate([yPosition + 7, 15, -width/2])
+            translate([yPosition + 6, 15, -width/2])
                 rotate([0, -lsAngle, 0])
                     power();
         }
@@ -196,7 +201,7 @@ module case() {
                     cylinder(h=14, r=1.5, center=true);*/
             // Hole for PCB
             translate([-height/2, 0,0])
-                cube([20, length - border*2, width - border*2], center=true);
+                cube([50, length - border*2 + 3, width - border*2 + 3], center=true);
         }
         
         // Audio case
@@ -206,11 +211,11 @@ module case() {
         }
         
         // Holes for proximity touch
-        {
+      /*  {
             translate([height/2-1, 0, -width/2+border])
                 rotate([90, 0, 0])
                     cylinder(h=length-border*2, r=1, center=true);
-        }
+        }*/
     }
 };
 
@@ -229,7 +234,7 @@ module audioCase(expand) {
                 cube([height - connectorHeight + expand*2, length/2+expand, audioCaseThickness]);
                 w1 = (length-connectorWidth+expand*2)/2;
                 w2 = w1 - connectorHeight/tan(connectorAngle);
-                polyhedron(
+             /*   polyhedron(
                     points = [
                         [0,  0,  0 ],  //0 *
                         [-connectorHeight,  0,  0],  //1 *
@@ -248,7 +253,7 @@ module audioCase(expand) {
                         [6,7,3,2],  // back
                         [7,4,0,3]
                     ]
-                );
+                );*/
             };
 
     union()
@@ -259,8 +264,19 @@ module audioCase(expand) {
     }
 };
 
-//lightShader();
-case();
+lightShader(-3, -2);
+
+//case();
+/*
+difference()
+{
+    case();
+    maxSize = max(length, width) * 2;
+    rotate([0, 180, 0])
+        translate([-52.5, -maxSize/2, -maxSize/2])
+            cube(maxSize,center=false);
+}*/
+
 /*
 difference()
 {
@@ -270,5 +286,5 @@ difference()
            //     scale([10, 0, 0])
             audioCase(-0.5);
     };
-    holes();
+ //   holes();
 }*/

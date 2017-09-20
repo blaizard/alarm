@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Kit projectId="4" projectName="default" projectType="PTC" Technology="QTouch" DeviceVariant="48" QTouchDesignVersion="1.0" QTouchLibraryVersion="5.9.0.191">
+  <KitLayout>
+    <KitSize width="150" height="120" kitPanelThickness="0.1" kitImage="" />
+    <Button id="0" name="Button0" width="11" height="11" positionX="15" positionY="26" fromChannel="0" toChannel="0" type="0" YWidth="0.3" GapThickness="0.5" />
+    <Button id="1" name="Button1" width="11" height="11" positionX="43" positionY="26" fromChannel="1" toChannel="1" type="0" YWidth="0.3" GapThickness="0.5" />
+    <Button id="2" name="Button2" width="11" height="11" positionX="74" positionY="26" fromChannel="2" toChannel="2" type="0" YWidth="0.3" GapThickness="0.5" />
+    <Button id="3" name="Button3" width="11" height="11" positionX="112" positionY="26" fromChannel="3" toChannel="3" type="0" YWidth="0.3" GapThickness="0.5" />
+  </KitLayout>
+  <TechnologySelectionOptions MoistureTolerant="false" NoiseImmune="false" />
+  <GlobalConfiguration recalibrationThreshold="0" detectIntegrationLimit="4" driftHoldTime="20" sensorMaximumDuration="0" negativeDriftRate="20" positiveDriftRate="5" libraryTimingSetting="0" measurementPeriod="20" positiveRecalibrationDelay="10" ticksPerMilliSec="0" />
+  <OtherOprtions filterLevel="Four" autoOS="Zero" noiseCounter="0" FrequencyMode="NONE" FrequencyHop1="One" FrequencyHop2="Two" FrequencyHop3="Three" FrequencyAutoTuningStatus="Off" CsdValue="0" AutoOsSignalStabilityLimit="20" FrequencyAutoTuningSignalStabilityLimit="10" FrequencyAutoTuningCount="12" NoiseMeasurementStatus="Off" NoiseMeasurementSignalStabilityLimit="10" NoiseMeasurementNoiseLimit="12" NoiseMeasurementBufferCount="Five" LockoutStatus="SingleKeyLockout" LockoutCountdown="10" PtcInterruptPriorityLevel="Three" QuickReburstStatus="On" MoistureQuickReburstStatus="On" AksGroupStatus="Off" GpioStatus="PULLHIGH_WHEN_NOT_MEASURED" SensorPostProcessingMode="TOUCH_LIBRARY_DRIVEN" delayCycle="1" powerOptimization="0" />
+  <SensorConfigurations autoAssign="true">
+    <SensorConfiguration sensorType="1" fromChannel="0" toChannel="0" aksGroup="0" detectThreshold="10" detectHysteresis="1" positiveRecalibrationFlag="0" isLowPower="0" LumpSensorGroup="0" MoisGroup="0" MltchGroup="0" />
+    <SensorConfiguration sensorType="1" fromChannel="1" toChannel="1" aksGroup="0" detectThreshold="10" detectHysteresis="1" positiveRecalibrationFlag="0" isLowPower="0" LumpSensorGroup="0" MoisGroup="0" MltchGroup="0" />
+    <SensorConfiguration sensorType="1" fromChannel="2" toChannel="2" aksGroup="0" detectThreshold="10" detectHysteresis="1" positiveRecalibrationFlag="0" isLowPower="0" LumpSensorGroup="0" MoisGroup="0" MltchGroup="0" />
+    <SensorConfiguration sensorType="1" fromChannel="3" toChannel="3" aksGroup="0" detectThreshold="10" detectHysteresis="1" positiveRecalibrationFlag="0" isLowPower="0" LumpSensorGroup="0" MoisGroup="0" MltchGroup="0" />
+  </SensorConfigurations>
+  <PinConfiguration useDefaultPinConfiguration="False">
+    <PairSense>
+      <Sensor Name="Button0" Type="Button" Index="0" NumberOfChannels="1">
+        <SensingPair Name="Y0" PortPin="PA2" GainSettings="Gain0" />
+      </Sensor>
+      <Sensor Name="Button1" Type="Button" Index="1" NumberOfChannels="1">
+        <SensingPair Name="Y1" PortPin="PA3" GainSettings="Gain0" />
+      </Sensor>
+      <Sensor Name="Button2" Type="Button" Index="2" NumberOfChannels="1">
+        <SensingPair Name="Y2" PortPin="PA4" GainSettings="Gain0" />
+      </Sensor>
+      <Sensor Name="Button3" Type="Button" Index="3" NumberOfChannels="1">
+        <SensingPair Name="Y3" PortPin="PA5" GainSettings="Gain0" />
+      </Sensor>
+    </PairSense>
+  </PinConfiguration>
+  <BSWChannelProperties AutoTuning="NONE" SeriesResistorValue="Zero" PreScalarValue="One">
+    <Channel Index="0" PreScalarValue="One" SeriesResistorValue="Zero" CcPreScalarValue="One" CcSeriesResistorValue="Zero" AutoOs="Zero" FilterLevel="Four" Gain="Gain0" />
+    <Channel Index="1" PreScalarValue="One" SeriesResistorValue="Zero" CcPreScalarValue="One" CcSeriesResistorValue="Zero" AutoOs="Zero" FilterLevel="Four" Gain="Gain0" />
+    <Channel Index="2" PreScalarValue="One" SeriesResistorValue="Zero" CcPreScalarValue="One" CcSeriesResistorValue="Zero" AutoOs="Zero" FilterLevel="Four" Gain="Gain0" />
+    <Channel Index="3" PreScalarValue="One" SeriesResistorValue="Zero" CcPreScalarValue="One" CcSeriesResistorValue="Zero" AutoOs="Zero" FilterLevel="Four" Gain="Gain0" />
+  </BSWChannelProperties>
+</Kit>
