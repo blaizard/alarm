@@ -66,6 +66,9 @@
 	],
 	"file_history":
 	[
+		"/C/Users/blaise/Dropbox/simplecms/index.html",
+		"/C/Users/blaise/Dropbox/simplecms/index.php",
+		"/C/Users/blaise/Dropbox/simplecms/.htaccess",
 		"/C/Users/blaise/Dropbox/aube/sw/tools/wifi.sh",
 		"/C/Users/blaise/Dropbox/aube/sw/core/js/irform/irform.date.js",
 		"/C/Users/blaise/Dropbox/aube/sw/core/js/irform/irform.spiner.js",
@@ -190,10 +193,7 @@
 		"/home/blaise/Dropbox/alarm/srcs/theme/default/config-layout.scss",
 		"/home/blaise/Dropbox/simplecms/projects/irform/git/srcs/irform.irexplorer.js",
 		"/home/blaise/Dropbox/alarm/srcs/modules/clock/view.php",
-		"/home/blaise/Dropbox/alarm/srcs/api.php",
-		"/home/blaise/Dropbox/alarm/srcs/index.html",
-		"/home/blaise/Dropbox/alarm/srcs/core/php/module.php",
-		"/home/blaise/Dropbox/alarm/srcs/modules/clock/module.php"
+		"/home/blaise/Dropbox/alarm/srcs/api.php"
 	],
 	"find":
 	{

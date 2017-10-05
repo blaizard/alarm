@@ -23,6 +23,9 @@
 				$(viewSelector).addClass("weather");
 				var elt = document.createElement("div");
 				$(elt).addClass("weather-main");
+
+				console.log(weather);
+
 				$(elt).html("<i class=\"icon-" + weather.code + "\"></i> " + weather.temp + "&deg;" + weather.units.temp);
 				$(viewSelector).append(elt);
 				// Create the forecast view 
@@ -38,7 +41,7 @@
 				// Resize (do this asynchronously to give the time to the font to load)
 				setTimeout(function() {
 					$(viewSelector).ircontainer("elementFill");
-				}, 10);
+				}, 100);
 			},
 			error: function(error) {
 				$(viewSelector).html(error);

@@ -1,5 +1,5 @@
 <?php
-	class EmptyModule extends Module
+	class RadioModule extends Module
 	{
 		public function view()
 		{
@@ -11,14 +11,14 @@
 
 		public function getName()
 		{
-			return "Empty";
+			return "Radio";
 		}
 
 		public function getDescription()
 		{
-			return "Empty space (no module selected)";
+			return "Radio";
 		}
 	}
 
-	$moduleClass = 'EmptyModule';
+	$moduleClass = 'RadioModule';
 ?>

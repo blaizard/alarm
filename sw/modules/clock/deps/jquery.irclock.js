@@ -96,6 +96,7 @@
 	};
 
 	$.fn.irclock.update = function() {
+
 		/* Stop the callback if the object does not exists anymore */
 		if ($(this).parents("body").length != 1) {
 			return;
@@ -114,25 +115,35 @@
         if (m < 10) {
 			m = "0" + m;
 		}
-		/* Check the alarm */
-		var alarmstampCurrent = date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds();
-		/* Identify the comming alarm */
-		var alarmstamp = options["alarmList"][0]["timestamp"]; /* TODO */
-		var alarmAction = options["alarmList"][0]["action"];
-		var alarmText = "TODAY";
-		/* Alarm */
-		if (Math.floor(alarmstampCurrent / 60) == Math.floor(alarmstamp / 60)) {
-			alarmText = "<< ALARM >>";
-			$.fn.irclock.alarm.call(this, alarmAction);
+
+		// Hack
+		h = "8";
+		m = "20";
+
+		var dateText = day_list[day] + ", " + month_list[month] + " " + d;
+
+		if (0) {
+			/* Check the alarm */
+			var alarmstampCurrent = date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds();
+			/* Identify the comming alarm */
+			var alarmstamp = options["alarmList"][0]["timestamp"]; /* TODO */
+			var alarmAction = options["alarmList"][0]["action"];
+			var alarmText = "TODAY";
+			/* Alarm */
+			if (Math.floor(alarmstampCurrent / 60) == Math.floor(alarmstamp / 60)) {
+				alarmText = "<< ALARM >>";
+				$.fn.irclock.alarm.call(this, alarmAction);
+			}
+			else if (alarmstampCurrent > alarmstamp) {
+				alarmText = day_list[(day + 1) % 7];
+			}
+			var alarmdate = new Date(alarmstamp * 1000);
+			alarmText += " " + alarmdate.getHours() + ":" + ((alarmdate.getMinutes() < 10) ? "0" : "") + alarmdate.getMinutes();
+			dateText += "&nbsp;&nbsp;<i class=\"fa fa-bell-o\" aria-hidden=\"true\"></i>&nbsp;&nbsp;" + alarmText;
 		}
-		else if (alarmstampCurrent > alarmstamp) {
-			alarmText = day_list[(day + 1) % 7];
-		}
-		var alarmdate = new Date(alarmstamp * 1000);
-		alarmText += " " + alarmdate.getHours() + ":" + ((alarmdate.getMinutes() < 10) ? "0" : "") + alarmdate.getMinutes();
 		/* Update the date */
 		$(this).find(".irclock-time:first").text(h + ":" + m);
-		$(this).find(".irclock-date:first").html(day_list[day] + ", " + month_list[month] + " " + d + "&nbsp;&nbsp;<i class=\"fa fa-bell-o\" aria-hidden=\"true\"></i>&nbsp;&nbsp;" + alarmText);
+		$(this).find(".irclock-date:first").html(dateText);
 		var obj = this;
 		/* Auto-size the text. Do it asynchronously to ensure that the DOM is updated */
 		$.fn.irclock.resize.call(obj);

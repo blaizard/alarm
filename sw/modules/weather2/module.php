@@ -1,5 +1,5 @@
 <?php
-	class Weather extends Module
+	class Weather2 extends Module
 	{
 		public function view()
 		{
@@ -25,9 +25,9 @@
 
 		public function getName()
 		{
-			return "<i class=\"fa fa-cloud\" aria-hidden=\"true\"></i> Weather";
+			return "<i class=\"fa fa-cloud\" aria-hidden=\"true\"></i> Weather 2";
 		}
 	}
 
-	$moduleClass = 'Weather';
+	$moduleClass = 'Weather2';
 ?>
