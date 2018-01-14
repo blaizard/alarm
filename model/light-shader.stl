@@ -1,0 +1,86 @@
+solid OpenSCAD_Model
+  facet normal -0.529999 1.17921e-016 0.847998
+    outer loop
+      vertex -3 96 7.305
+      vertex -2.31066e-014 -99 9.18001
+      vertex 2.08582e-014 99 9.18001
+    endloop
+  endfacet
+  facet normal -0.529999 0 0.847998
+    outer loop
+      vertex -2.31066e-014 -99 9.18001
+      vertex -3 96 7.305
+      vertex -3 -96 7.305
+    endloop
+  endfacet
+  facet normal -1 0 0
+    outer loop
+      vertex -3 -96 -5.055
+      vertex -3 96 7.305
+      vertex -3 96 -5.055
+    endloop
+  endfacet
+  facet normal -1 -0 0
+    outer loop
+      vertex -3 96 7.305
+      vertex -3 -96 -5.055
+      vertex -3 -96 7.305
+    endloop
+  endfacet
+  facet normal -0.808736 0 -0.588172
+    outer loop
+      vertex 2.31066e-014 99 -9.18001
+      vertex -3 -96 -5.055
+      vertex -3 96 -5.055
+    endloop
+  endfacet
+  facet normal -0.808736 1.79411e-016 -0.588172
+    outer loop
+      vertex -3 -96 -5.055
+      vertex 2.31066e-014 99 -9.18001
+      vertex -2.08582e-014 -99 -9.18001
+    endloop
+  endfacet
+  facet normal -0.707107 0.707107 -9.12181e-017
+    outer loop
+      vertex -3 96 -5.055
+      vertex 2.08582e-014 99 9.18001
+      vertex 2.31066e-014 99 -9.18001
+    endloop
+  endfacet
+  facet normal -0.707107 0.707107 0
+    outer loop
+      vertex 2.08582e-014 99 9.18001
+      vertex -3 96 -5.055
+      vertex -3 96 7.305
+    endloop
+  endfacet
+  facet normal 1 -2.22045e-016 1.22461e-016
+    outer loop
+      vertex -2.31066e-014 -99 9.18001
+      vertex 2.31066e-014 99 -9.18001
+      vertex 2.08582e-014 99 9.18001
+    endloop
+  endfacet
+  facet normal 1 -2.22045e-016 1.22461e-016
+    outer loop
+      vertex 2.31066e-014 99 -9.18001
+      vertex -2.31066e-014 -99 9.18001
+      vertex -2.08582e-014 -99 -9.18001
+    endloop
+  endfacet
+  facet normal -0.707107 -0.707107 -8.65927e-017
+    outer loop
+      vertex -2.31066e-014 -99 9.18001
+      vertex -3 -96 -5.055
+      vertex -2.08582e-014 -99 -9.18001
+    endloop
+  endfacet
+  facet normal -0.707107 -0.707107 0
+    outer loop
+      vertex -3 -96 -5.055
+      vertex -2.31066e-014 -99 9.18001
+      vertex -3 -96 7.305
+    endloop
+  endfacet
+endsolid OpenSCAD_Model

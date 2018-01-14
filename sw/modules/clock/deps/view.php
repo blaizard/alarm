@@ -11,6 +11,7 @@
 		var config = $(ircontainerSelector).ircontainer("config");
 		$(viewSelector).irclock({
 			offset: config["date"],
+			type: config["display"],
 			alarmList: [{
 				timestamp: config["alarm"],
 				action: function() {

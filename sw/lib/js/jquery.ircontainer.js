@@ -45,7 +45,7 @@
 				$.fn.ircontainer.textFill.call(this, data);
 				return;
 			case "elementFill":
-				$.fn.ircontainer.elementFill.call(this);
+				$.fn.ircontainer.elementFill.call(this, data);
 				return;
 			}
 		}
@@ -142,12 +142,12 @@
 		jq_elt_text.css("fontSize", min_font_size + "px");
 	};
 
-	$.fn.ircontainer.elementFill = function() {
+	$.fn.ircontainer.elementFill = function(selector) {
 		// Auto-size the text
 		$(this).css({
 			height: "100%",
 			width: "100%"
-		}).ircontainer("textFill").css({
+		}).ircontainer("textFill", selector).css({
 			height: "auto",
 			width: "auto"
 		});

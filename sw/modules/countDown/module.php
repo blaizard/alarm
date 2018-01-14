@@ -9,13 +9,14 @@
 		public function config()
 		{
 			return array(
-				array("name" => "date", "caption" => "Date", "type" => "date", "isRunning" => false)
+				array("name" => "date", "caption" => "Date", "type" => "date", "isRunning" => false),
+				array("name" => "message", "caption" => "Message", "type" => "input")
 			);
 		}
 
 		public function getName()
 		{
-			return "<i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> Count Down";
+			return "<i class=\"fa fa-tachometer\" aria-hidden=\"true\"></i> Count Down";
 		}
 	}
 

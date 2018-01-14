@@ -1,0 +1,41 @@
+Speech:
+
+-  Use https://responsivevoice.org/https for tts:
+
+Good morning beautiful, it is 8 20am.
+It might rain in the afternoon, so don't forget your umbrella.
+Have a lovely day!
+
+
+-> Enabling 
+
+
+
+Aube is not a just an alarm clock, it's an assistant that will track your sleep and ensure you wake up smoothly every day!
+
+Hi, I am Blaise, maker of Aube, the smart clock.
+
+It is entirely configurable, from it's software to it's hardware, you can customize it to fit your personality and the atmosphere of your bedroom.
+
+Take a look, 
+
+<Show how to customizer the screen>
+
+---
+
+It will play your favorite playlist in the morning, switch on your smart lamps and 
+
+---
+
+Connect it to your tracker or use our custom algorithm to track your sleep
+
+
+---
+
+Introducing Aube
+
+
+
+Aube is a smart alarm clock, that will guide you from the time you go to sleep until you wake up.
+
+It is also an open platform that let you develop your own apps.

@@ -10,6 +10,7 @@
 		{
 			return array(
 				array("name" => "date", "caption" => "Date", "type" => "date", "isDelta" => true),
+				array("name" => "display", "caption" => "Display", "type" => "select", "list" => array("analog" => "Analog", "digital" => "Digital")),
 				array("name" => "alarm", "caption" => "Alarm", "type" => "array", "template" => [
 					array("name" => "time", "caption" => "Time", "type" => "date", "isDate" => false, "isSeconds" => false, "isRunning" => false),
 					array("name" => "action", "caption" => "Action", "type" => "array", "template" => array(

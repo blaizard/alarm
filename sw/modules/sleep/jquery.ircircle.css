@@ -1,0 +1,17 @@
+.irCircle {
+	position: relative;
+}
+
+.irCircle canvas {
+	display: block;
+	margin: 0 auto;
+}
+
+.irCircle span {
+	color: #fff;
+	display: block;
+	text-align: center;
+	font-family: sans-serif;
+	font-size: 0.1em;
+	z-index: 10;
+}

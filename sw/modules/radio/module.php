@@ -11,7 +11,7 @@
 
 		public function getName()
 		{
-			return "Radio";
+			return "<i class=\"fa fa-bullhorn\" aria-hidden=\"true\"></i> Radio";
 		}
 
 		public function getDescription()

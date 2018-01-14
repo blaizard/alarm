@@ -129,32 +129,23 @@
 					break;
 				};
 
-				$(elt).html("<div class=\"weather-icon\">" + iconContent + "</div><div class=\"weather-temperature\">" + weather.temp + "&deg;" + weather.units.temp + "</div>");
-				
+				$(elt).html("<div class=\"weather-icon\">" + iconContent + "</div>");
+
+				var eltTemp = document.createElement("div");
+				$(eltTemp).addClass("weather-temperature");
+				$(eltTemp).html("<div class=\"weather-main-temperature\">" + weather.temp + "&deg;" + weather.units.temp + "</div>");
 
 				{
 					var eltHiLow = document.createElement("div");
 					$(eltHiLow).addClass("weather-hilow");
 					$(eltHiLow).append("<div class=\"weather-hi\"><i class=\"fa fa-long-arrow-up\" aria-hidden=\"true\"></i> " + weather.high + "&deg;" + weather.units.temp + "</div>");
 					$(eltHiLow).append("<div class=\"weather-low\"><i class=\"fa fa-long-arrow-down\" aria-hidden=\"true\"></i> " + weather.low + "&deg;" + weather.units.temp + "</div>");
-					$(elt).append(eltHiLow);
+					$(eltTemp).append(eltHiLow);
 				}
-
+				$(elt).append(eltTemp);
 				$(viewSelector).append(elt);
-				$(viewSelector).ircontainer("elementFill");
 
-		/*		// Create the forecast view 
-				var elt = document.createElement("div");
-				$(elt).addClass("weather-forecast");
-				var date = new Date;
-				var day = date.getDay();
-				var day_list = new Array('SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT');
-				for (var i=0; i<4; i++) {
-					$(elt).append("<div class=\"weather-forecast-item\"><i class=\"icon-" + weather.forecast[i].code + "\"></i> " + weather.forecast[i].high + "&deg;" + weather.units.temp + "<div class=\"weather-forecast-item-day\">" + day_list[(day + i + 1) % 7] + "</div></div>");
-				}
-				$(viewSelector).append(elt);*/
-				// Resize (do this asynchronously to give the time to the font to load)
-				
+				$(viewSelector).ircontainer("elementFill");
 			},
 			error: function(error) {
 				$(viewSelector).html(error);

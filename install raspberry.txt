@@ -1,6 +1,9 @@
 Follow:
 https://blog.gordonturner.com/2017/07/22/raspberry-pi-full-screen-browser-raspbian-july-2017/
 
+or this one (actually better as no need for LXDE)
+https://rataks.com/blog/raspberry-pi-touchscreen-in-moode-with-chromium.html
+
 ----- setup wifi
 
 ----- change password to 1234
@@ -33,10 +36,12 @@ sudo apt-get install php5-fpm php5 php5-cli php5-json
 #@sleep 5
 
 # Normal website that does not need any exceptions
-@/usr/bin/chromium-browser --incognito --start-maximized --touch-events=enabled --enable-pinch --kiosk http://localhost:8000
+@/usr/bin/chromium-browser --incognito --start-maximized --touch-events=enabled --enable-pinch --kiosk --disable-touch-drag-drop --enable-touchview --disable-touch-drag-drop --app=http://localhost:8000 -- -nocursor
 # Enable mixed http/https content, remember if invalid certs were allowed (ie self signed certs)
 #@/usr/bin/chromium-browser --incognito --start-maximized --kiosk --allow-running-insecure-content --remember-cert-error-decisions http://gordonturner.com
 @unclutter -display :0 -noevents -grab
 @xset s off
 @xset s noblank
 @xset -dpms
+
+

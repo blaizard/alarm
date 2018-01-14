@@ -46,13 +46,19 @@
 			$(value).text(valueText);
 
 			var unit = $("<div/>", {
-				style: "font-size: 0.5em; font-variant: small-caps;"
+				style: "font-size: 0.5em; font-variant: small-caps; margin-top: -0.5em;"
 			});
 			$(unit).text(unitText);
+
+			var message = $("<div/>", {
+				style: "font-size: 0.3em; white-space: nowrap; color: #777;"
+			});
+			$(message).text(config["message"]);
 
 			$(viewSelector).empty();
 			$(viewSelector).append(value);
 			$(viewSelector).append(unit);
+			$(viewSelector).append(message);
 			$(viewSelector).ircontainer("elementFill");
 
 			setTimeout(updateFct, updatePeriod);
@@ -60,6 +66,5 @@
 
 		updateFct();
 	}
-
 
 </script>

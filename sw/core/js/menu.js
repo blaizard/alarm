@@ -165,6 +165,13 @@ Menu.layout = function (callback) {
 
 	var layoutList = [
 		"<table style=\"width: 100%; height: 100%;\">"
+			+ "<tr style=\"height: 50%;\"><td class=\"container\" style=\"width: 50%;\"></td><td class=\"container\" style=\"width: 50%;\"></td></tr>"
+			+ "<tr style=\"height: 50%;\"><td class=\"container\" colspan=\"2\"></td></tr>"
+		+ "</table>",
+		"<table style=\"width: 100%; height: 100%;\">"
+			+ "<tr><td class=\"container\" style=\"width: 50%;\"></td><td style=\"width: 50%;\"><table style=\"width: 100%; height: 100%;\"><tr style=\"height: 50%;\"><td class=\"container\"></td></tr><tr style=\"height: 50%;\"><td class=\"container\"></td></tr></table></td></tr>"
+		+ "</table>",
+		"<table style=\"width: 100%; height: 100%;\">"
 			+ "<tr style=\"height: 50%;\"><td class=\"container\" colspan=\"2\"></td><td class=\"container\"></td></tr>"
 			+ "<tr style=\"height: 50%;\"><td class=\"container\" style=\"width: 33%;\"></td><td class=\"container\" style=\"width: 33%;\"></td><td class=\"container\" style=\"width: 33%;\"></td></tr>"
 		+ "</table>",
@@ -297,7 +304,7 @@ Menu.moduleConfig = function (containerId, callback) {
 	var html = $("<div/>");
 	Core.loading(html);
 	var display = Display.create(html, {
-		title: "Configuration Module " + containerId,
+		title: "Container " + (containerId + 1),
 		id: "moduleConfig",
 		callback: function() {
 			Menu.moduleConfig.preCloseCallback(Menu.moduleConfig.callback);

@@ -11,7 +11,7 @@
 
 		public function getName()
 		{
-			return "Empty";
+			return "-";
 		}
 
 		public function getDescription()

@@ -1,0 +1,24 @@
+.metrics {
+	width: 1em;
+	height: 0.8em;
+	display: inline-block;
+	margin-top: 0.2em;
+}
+
+.metrics .circle {
+	height: 0.5em;
+}
+
+.metrics .text {
+	height: 0.3em;
+	font-size: 0.1em;
+	color: #777;
+	padding-top: 0.5em;
+	font-variant: small-caps;
+}
+
+.sleep {
+	height: 1em;
+	white-space: nowrap;
+	display: inline-block;
+}
