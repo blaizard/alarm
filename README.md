@@ -22,6 +22,8 @@ Inspired by Nordic designs, Aube is simple, pure with straight lines and strong 
 Additionally, the user can customize the design by selecting the wooden base material.
 
 ![alt text](https://github.com/blaizard/alarm/blob/master/docs/front.jpg?raw=true)
+
+3D modelization of the casing of Aube, this contains all the necessary electronics.
 ![alt text](https://github.com/blaizard/alarm/blob/master/docs/3dmodel.png?raw=true)
 
 ## Light
