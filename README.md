@@ -2,6 +2,8 @@
 
 Beautiful. Simple. Smart.
 
+![Animation](https://github.com/blaizard/alarm/blob/master/model/video.gif?raw=true)
+
 Aube is a smart alarm clock. It will guide you from the time you touch your bed until you wake up and is here make it a pleasant experience.
 Aube is 3 major ideas: a design, a light and a smart device. 
 
@@ -32,10 +34,10 @@ These are the raw features of Aube:
 Inspired by Nordic designs, Aube is simple, pure with straight lines and strong contrasts.
 Additionally, the user can customize the design by selecting the wooden base material.
 
-![alt text](https://github.com/blaizard/alarm/blob/master/docs/front.jpg?raw=true)
+![Front view](https://github.com/blaizard/alarm/blob/master/docs/front.jpg?raw=true)
 
 3D modelization of the casing of Aube, this contains all the necessary electronics.
-![alt text](https://github.com/blaizard/alarm/blob/master/docs/3dmodel.png?raw=true)
+![3d model](https://github.com/blaizard/alarm/blob/master/docs/3dmodel.png?raw=true)
 
 ## Light
 Our well-being and mood throughout the day is largely influenced by the light we are exposed to. Aube incorporates a light made to mimic the natural sun light.
@@ -43,12 +45,15 @@ Both intensity and light temperature can vary from 6500K to 4500K to recreate at
 
 The light has capacitive hovering capability, which means, without touching the device and by simply passing your hand on top of Aube, one can dim in or out the light.
 
+Extrat of the LED lighting circuitry
+![LED lighting](https://github.com/blaizard/alarm/blob/master/docs/circuit.jpg?raw=true)
+
 ## Apps
 A set of Apps are displayed on the main screen of the alarm clock to provide the user with a personalized dashboard. The layout and the Apps can be selected by the user and configured to fit customized needs.
 
 The following describes the default Apps coming with Aube. They all come with various designs that can be selected to create a personalized experience.
 
-![alt text](https://github.com/blaizard/alarm/blob/master/docs/apps.png?raw=true)
+![Applications](https://github.com/blaizard/alarm/blob/master/docs/apps.png?raw=true)
 
 ## Clock
 The clock is the essential application for an alarm clock. It’s core functionality is to provide accurate time but also notify the user on important times or dates.
