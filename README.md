@@ -2,8 +2,6 @@
 
 Beautiful. Simple. Smart.
 
-![Animation](https://github.com/blaizard/alarm/blob/master/model/video.gif?raw=true)
-
 Aube is a smart alarm clock. It will guide you from the time you touch your bed until you wake up and is here make it a pleasant experience.
 Aube is 3 major ideas: a design, a light and a smart device. 
 
