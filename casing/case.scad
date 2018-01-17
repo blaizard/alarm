@@ -264,7 +264,9 @@ module audioCase(expand) {
     }
 };
 
-//lightShader(-3, -2);
+translate([80, 0, 0])
+    rotate([0, -10, 0])
+        lightShader(-3, -2);
 
 case();
 
@@ -277,7 +279,7 @@ difference()
             cube(maxSize,center=false);
 }
 
-
+translate([0, 0, -20])
 difference()
 {
     union()

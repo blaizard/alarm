@@ -8,7 +8,6 @@ Aube is 3 major ideas: a design, a light and a smart device.
 ## Why Aube?
 Pronounced /ob/, it is the translation of “dawn” in French. Dawn is a peaceful and relaxing experience which Aube is here to recreate every morning.
 
-
 ## Features
 These are the raw features of Aube:
 - Stereo speakers
@@ -23,6 +22,7 @@ Inspired by Nordic designs, Aube is simple, pure with straight lines and strong 
 Additionally, the user can customize the design by selecting the wooden base material.
 
 ![alt text](https://github.com/blaizard/alarm/blob/master/docs/front.jpg?raw=true)
+![alt text](https://github.com/blaizard/alarm/blob/master/docs/3dmodel.png?raw=true)
 
 ## Light
 Our well-being and mood throughout the day is largely influenced by the light we are exposed to. Aube incorporates a light made to mimic the natural sun light.
@@ -84,3 +84,14 @@ All Apps are built on a fixed but powerful API (Application Programming Interfac
 The process is simple, one needs to download the SDK (Software Development Kit), and follow the tutorial to develop its own application.
 
 The application development is extremely simple in order to give anyone the possibility to develop its own Apps. In addition, applications are developed in the most predominant programming language (Javascript) and hence can be coupled with a variety of existing modules to speed up development.
+
+# How to build Aube
+
+The prototype is based on a Raspberry Pi 3 with the official 7 inches touch screen.
+To fully build Aube, you will need a 3d printer, electronic circuit knowledges and some time!
+
+The source contains various directories:
+- **casing**: Contains the 3d models to be printed in order to build the skeleton of Aube
+- **fw**: The firmware written in C to be compiled and loaded to a Microchip SAMD21 Microcontroller
+- **schematics**: The electronics to handle the LED lighting with proximity sensor and the other sensors
+- **sw**: The GUI of the alarm clock, written in Vanilla-Javascript and some back-end in Python
