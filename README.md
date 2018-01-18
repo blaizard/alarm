@@ -37,6 +37,7 @@ Additionally, the user can customize the design by selecting the wooden base mat
 ![Front view](https://github.com/blaizard/alarm/blob/master/docs/front.jpg?raw=true)
 
 3D modelization of the casing of Aube, this contains all the necessary electronics.
+
 ![3d model](https://github.com/blaizard/alarm/blob/master/docs/3dmodel.png?raw=true)
 
 ## Light
@@ -45,7 +46,8 @@ Both intensity and light temperature can vary from 6500K to 4500K to recreate at
 
 The light has capacitive hovering capability, which means, without touching the device and by simply passing your hand on top of Aube, one can dim in or out the light.
 
-Extract of the LED lighting circuitry
+Extract of the LED lighting circuitry.
+
 ![LED lighting](https://github.com/blaizard/alarm/blob/master/docs/circuit.jpg?raw=true)
 
 ## Apps
