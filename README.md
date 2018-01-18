@@ -2,6 +2,8 @@
 
 Beautiful. Simple. Smart.
 
+![Front view](https://github.com/blaizard/alarm/blob/master/model/video.gif?raw=true)
+
 Aube is a smart alarm clock. It will guide you from the time you touch your bed until you wake up and is here make it a pleasant experience.
 Aube is 3 major ideas: a design, a light and a smart device. 
 
@@ -43,7 +45,7 @@ Both intensity and light temperature can vary from 6500K to 4500K to recreate at
 
 The light has capacitive hovering capability, which means, without touching the device and by simply passing your hand on top of Aube, one can dim in or out the light.
 
-Extrat of the LED lighting circuitry
+Extract of the LED lighting circuitry
 ![LED lighting](https://github.com/blaizard/alarm/blob/master/docs/circuit.jpg?raw=true)
 
 ## Apps
